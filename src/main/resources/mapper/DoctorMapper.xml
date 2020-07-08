@@ -5,7 +5,7 @@
 <mapper namespace="org.csu.hospital.persistence.DoctorMapper">
     <select id="getDoctorList" resultType="Doctor">
         select
-        docId as docId
+        *
         from doctor
     </select>
 
