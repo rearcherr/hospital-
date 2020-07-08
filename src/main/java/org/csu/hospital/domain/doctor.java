@@ -1,4 +1,6 @@
 package org.csu.hospital.domain;
 
-public class Doctor {
+public class doctor {
+    //test
+    int docId;
 }

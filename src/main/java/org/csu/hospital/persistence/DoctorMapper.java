@@ -8,4 +8,5 @@ import java.util.List;
 @Repository
 public interface DoctorMapper {
     List<Doctor> getDoctorList();
+
 }
