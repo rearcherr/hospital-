@@ -1,6 +1,7 @@
 package org.csu.hospital.controller;
 
 import org.csu.hospital.domain.Patient;
+import org.csu.hospital.service.AccountService;
 import org.csu.hospital.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class AccountController {
 
     @Autowired
-    PatientService patientService;
+    AccountService accountService;
 
     @PostMapping("/login")
     @ResponseBody
@@ -23,7 +24,7 @@ public class AccountController {
         Patient patient = new Patient();
         patient.setPatId(username);
         patient.setPatPwd(password);
-        if(patientService.verifyAccount(patient))
+        if(accountService.verifyAccount(patient))
         {
             return password;
         }
@@ -38,7 +39,7 @@ public class AccountController {
         Patient patient = new Patient();
         patient.setPatId(username);
         patient.setPatPwd(password);
-        if(patientService.verifyAccount(patient))
+        if(accountService.verifyAccount(patient))
         {
             return password;
         }
