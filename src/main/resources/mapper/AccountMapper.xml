@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.csu.hospital.persistence.AccountMapper">
+    <select id="selectAccountFromUsername" parameterType="long" resultType="int">
+        select
+        count(*)
+        from patient
+        where patId = #{username}
+    </select>
+    <select id="selectAccountFromUsernameAndPwd" parameterType="org.csu.hospital.domain.Patient" resultType="int">
+        select
+        count(*)
+        from patient
+        where patId = #{patId} and patPwd = #{patPwd}
+    </select>
+
+</mapper>
