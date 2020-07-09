@@ -9,4 +9,10 @@
         From Patient
         WHERE  patTel = #{value}
     </select>
+    <insert id="insertPatient" parameterType="Patient">
+        INSERT INTO PATIENT
+        (patName, patTel,patPwd)
+        VALUES(
+            #{patName},#{patTel}, #{patPwd})
+    </insert>
 </mapper>

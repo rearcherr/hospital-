@@ -7,4 +7,7 @@ import org.springframework.stereotype.Repository;
 public interface PatientMapper {
     Patient getPatient(String patTel);
 
+    void insertPatient(Patient patient);
+
+
 }

@@ -1,6 +1,6 @@
 package org.csu.hospital.domain;
 
-public class returnLog {
+public class ReturnLog {
     private int code;
     private String token;
 
@@ -19,11 +19,11 @@ public class returnLog {
     public void setToken(String token) {
         this.token = token;
     }
-    public returnLog(int code,String token){
+    public ReturnLog(int code, String token){
         this.code=code;
         this.token=token;
     }
-    public returnLog(int code){
+    public ReturnLog(int code){
         this.code=code;
         this.token=null;
     }
