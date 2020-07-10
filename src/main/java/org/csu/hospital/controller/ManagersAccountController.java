@@ -14,7 +14,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/managers")
-public class AccountController {
+public class ManagersAccountController {
 
     @Autowired
     AccountService accountService;
