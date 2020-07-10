@@ -1,5 +1,7 @@
 package org.csu.hospital.controller;
 
+import com.alibaba.fastjson.JSON;
+import org.csu.hospital.domain.Manager;
 import org.csu.hospital.domain.Patient;
 import org.csu.hospital.service.AccountService;
 import org.csu.hospital.service.PatientService;
@@ -10,36 +12,55 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Controller
-@RequestMapping("/manage")
+@RequestMapping("/managers")
 public class AccountController {
 
     @Autowired
     AccountService accountService;
 
-    @PostMapping("/login")
+    @PostMapping("/tokens")
     @ResponseBody
-    public String login(@RequestParam("username") int username,@RequestParam("password") String password)
+    public String login(@RequestParam("username") String username,@RequestParam("password") String password)
     {
-        Patient patient = new Patient();
-        patient.setPatId(username);
-        patient.setPatPwd(password);
-        if(accountService.verifyAccount(patient))
+        Manager manager = new Manager();
+        manager.setUsername(username);
+        manager.setPassword(password);
+        Map<String,String> responseMap = new HashMap<String, String>();
+        if(accountService.verifyAccount(manager))
         {
-            return password;
+            //对应账号密码正确
+            if(accountService.verifyAccountAndPassword(manager)){
+                String token = accountService.getToken(username);
+                responseMap.put("code","200");
+                responseMap.put("token",token);
+                String responseJson = JSON.toJSONString(responseMap);
+                return responseJson;
+            }else {
+                //对于账号存在但是密码不正确
+                responseMap.put("code","300");
+                String responseJson = JSON.toJSONString(responseMap);
+                return responseJson;
+            }
         }
         else {
-            return password;
+            //对于账号不存在
+            responseMap.put("code","400");
+            String responseJson = JSON.toJSONString(responseMap);
+            return responseJson;
         }
     }
     @PostMapping("/logout")
     @ResponseBody
-    public String logout(@RequestParam("username") int username,@RequestParam("password") String password)
+    public String logout(@RequestParam("username") String username,@RequestParam("password") String password)
     {
-        Patient patient = new Patient();
-        patient.setPatId(username);
-        patient.setPatPwd(password);
-        if(accountService.verifyAccount(patient))
+        Manager manager = new Manager();
+        manager.setUsername(username);
+        manager.setPassword(password);
+        if(accountService.verifyAccount(manager))
         {
             return password;
         }

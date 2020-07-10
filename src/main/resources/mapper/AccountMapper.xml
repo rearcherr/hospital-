@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.csu.hospital.persistence.AccountMapper">
-    <select id="selectAccountFromUsername" parameterType="long" resultType="int">
+    <select id="selectAccountFromUsername" parameterType="string" resultType="int">
         select
         count(*)
         from patient
@@ -13,7 +13,7 @@
         select
         count(*)
         from patient
-        where patId = #{patId} and patPwd = #{patPwd}
+        where patId = #{username} and patPwd = #{password}
     </select>
 
 </mapper>
