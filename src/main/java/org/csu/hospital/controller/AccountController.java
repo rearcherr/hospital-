@@ -7,10 +7,7 @@ import org.csu.hospital.service.AccountService;
 import org.csu.hospital.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -53,19 +50,12 @@ public class AccountController {
             return responseJson;
         }
     }
-    @PostMapping("/logout")
+    @GetMapping("/tokens/{username}")
     @ResponseBody
-    public String logout(@RequestParam("username") String username,@RequestParam("password") String password)
+    public String logout(@PathVariable String username)
     {
-        Manager manager = new Manager();
-        manager.setUsername(username);
-        manager.setPassword(password);
-        if(accountService.verifyAccount(manager))
-        {
-            return password;
-        }
-        else {
-            return password;
-        }
+        Map<String,String> responseMap = new HashMap<String, String>();
+        responseMap.put("code","200");
+        return JSON.toJSONString(responseMap);
     }
 }
