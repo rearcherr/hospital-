@@ -22,5 +22,11 @@
         *
         from registeredrecord
     </select>
+    <select id="getDoctorRegisterTime" parameterType="long" resultType="String">
+        select
+        Time
+        from registeredrecord
+        where docId = #{value}
+    </select>
 
 </mapper>

@@ -38,24 +38,6 @@ public class AppointmentService {
         patientMapper.insertPatient(patient);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   //还不能用
     public List<Doctor> getDoctorListByDepartment(String department) {
         return doctorMapper.getDoctorListByDepartment(department);
     }
@@ -63,12 +45,9 @@ public class AppointmentService {
 
     public List<Doctor> getDoctorListByDepartmentAndDate(List<Doctor> doctors,String date){
         int a = doctors.size();
-        System.out.println(a);
         List<Registeredrecord> registeredrecords = doctorMapper.getRegisterDate();
         List<Doctor> doctors1 = new ArrayList<Doctor>();
         int b = registeredrecords.size();
-
-        System.out.println(b);
         if(b>0) {
             for (int i = 0; i < b; i++) {
                 if (registeredrecords.get(i).getTime().equals(date)) {
@@ -93,6 +72,10 @@ public class AppointmentService {
         else {
             return doctors;
         }
+    }
+
+    public List<String> getDoctorRegisterTime (long docId){
+        return doctorMapper.getDoctorRegisterTime(docId);
     }
 
 }

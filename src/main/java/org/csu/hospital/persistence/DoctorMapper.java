@@ -11,6 +11,7 @@ import java.util.List;
 public interface DoctorMapper {
     List<Doctor> getDoctorList();
     List<Doctor> getDoctorListByDepartment(String department);
-    List<Doctor> getDoctorListByDepartmentAndDate(List<Doctor> doctors);
+//    List<Doctor> getDoctorListByDepartmentAndDate(List<Doctor> doctors);
     List<Registeredrecord> getRegisterDate();
+    List<String> getDoctorRegisterTime(long docId);
 }

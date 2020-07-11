@@ -20,12 +20,12 @@ public class AppointmentController {
     @Autowired
     private AppointmentService appointmentService;
 
-    @GetMapping("/selectByDoctors")
-    @ResponseBody
-    public List<Doctor> getDoctorList(){
-        List<Doctor> doctors = appointmentService.getDoctorList();
-        return doctors;
-    }
+//    @GetMapping("/selectByDoctors")
+//    @ResponseBody
+//    public List<Doctor> getDoctorList(){
+//        List<Doctor> doctors = appointmentService.getDoctorList();
+//        return doctors;
+//    }
 
     //病人登录
     @PostMapping("/login")
@@ -95,7 +95,7 @@ public class AppointmentController {
             return departments;
         }
     }
-    //按日期选择(日期的格式是 2020-06-30-1 这种的）
+    //按日期选择(日期的格式是 2020-6-2 这种的）
     @GetMapping("/selectByDate")
     @ResponseBody
     public ReturnSelectByDate selectByDate(@RequestParam("date")String date,@RequestParam("office")String department){
@@ -138,6 +138,52 @@ public class AppointmentController {
         catch (Exception e){
             returnSelectByDate.setCode(400);
             return returnSelectByDate;
+        }
+    }
+
+    //按医生选择(日期的格式是 2020-6-2 这种的）
+    @GetMapping("/selectByDoctors")
+    @ResponseBody
+    public ReturnSelectByDoctors selectByDoctors(@RequestParam("date")String date,@RequestParam("office")String department){
+        String[] splitStrings = date.split("-");
+        ReturnSelectByDoctors returnSelectByDoctors = new ReturnSelectByDoctors();
+        List<ReturnDoctorInfo> doctorInfos = new ArrayList<ReturnDoctorInfo>();
+        returnSelectByDoctors.setDoctors(doctorInfos);
+        Calendar c1 = Calendar.getInstance();
+        int year = Integer.parseInt( splitStrings[0]);
+        int month = Integer.parseInt( splitStrings[1]);
+        int day = Integer.parseInt( splitStrings[2]);
+        c1.set(year, month - 1, day);
+        try{
+            returnSelectByDoctors.setCode(200);
+            List<Doctor> doctors = appointmentService.getDoctorListByDepartment(department);
+            int a = doctors.size();
+            for(int i=0;i<a;i++) {
+                Doctor doctor = doctors.get(i);
+                List<String> time = appointmentService.getDoctorRegisterTime(doctor.getDocId());
+                List<String> time1 = new ArrayList<String>();
+                for(int j=0;j<time.size();j++){
+                    String[] splitStrings1 = time.get(j).split("-");
+                    int y = Integer.parseInt( splitStrings1[0]);
+                    int m = Integer.parseInt( splitStrings1[1]);
+                    int d = Integer.parseInt( splitStrings1[2]);
+                    Calendar c2 = Calendar.getInstance();
+                    c2.set(y, m - 1, d);
+                    if(c2.after(c1)){
+                        time1.add(time.get(j));
+                    }
+
+                }
+                ReturnDoctorInfo returnDoctorInfo = new ReturnDoctorInfo();
+                returnDoctorInfo.setDoctor(doctor);
+                returnDoctorInfo.setTimeForbit(time1);
+                returnSelectByDoctors.addDoctors(returnDoctorInfo);
+            }
+            return returnSelectByDoctors;
+        }
+        catch (Exception e){
+            returnSelectByDoctors.setCode(400);
+            return returnSelectByDoctors;
         }
     }
 
