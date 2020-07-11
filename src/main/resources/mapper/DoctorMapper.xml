@@ -8,5 +8,19 @@
         *
         from doctor
     </select>
+    <select id="getDoctorListByDepartment" parameterType="String" resultType="Doctor">
+        select
+        doctor.*
+        from doctor,department
+        WHERE doctor.docDepartment=department.name and doctor.docDepartment=#{value}
+    </select>
+
+
+
+    <select id="getRegisterDate" resultType="Registeredrecord">
+        select
+        *
+        from registeredrecord
+    </select>
 
 </mapper>

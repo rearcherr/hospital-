@@ -6,6 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -47,6 +52,7 @@ public class AppointmentController {
 
             code = 400;
             returnLog = new ReturnLog(code);
+
             return returnLog;
         }
     }
@@ -89,6 +95,50 @@ public class AppointmentController {
             return departments;
         }
     }
+    //按日期选择(日期的格式是 2020-06-30-1 这种的）
+    @GetMapping("/selectByDate")
+    @ResponseBody
+    public ReturnSelectByDate selectByDate(@RequestParam("date")String date,@RequestParam("office")String department){
+//        List<Doctor> doctors = appointmentService.getDoctorListByDepartment(department);
+        String[] splitStrings = date.split("-");
+        ReturnSelectByDate returnSelectByDate = new ReturnSelectByDate();
+        Calendar c1 = Calendar.getInstance();
+        int year = Integer.parseInt( splitStrings[0]);
+        int month = Integer.parseInt( splitStrings[1]);
+        int day = Integer.parseInt( splitStrings[2]);
+        c1.set(year, month - 1, day);
+        List<List<Doctor>> lists = new ArrayList<List<Doctor>>();
+        try {
+            returnSelectByDate.setCode(200);
+            List<ReturnSelectByDateList> a = new ArrayList<ReturnSelectByDateList>();
+            returnSelectByDate.setList(a);
+            for (int i = 0; i < 7; i++) {
+                for (int j = 1; j < 5; j++) {
+                    // 获得年份
+                    int n = c1.get(Calendar.YEAR);
+                    // 获得月份
+                    int y = c1.get(Calendar.MONTH) + 1;
+                    // 获得日期
+                    int r = c1.get(Calendar.DATE);
+                    date = n + "-" + y + "-" + r + "-" + j;
+                    ReturnSelectByDateList returnSelectByDateList = new ReturnSelectByDateList();
+                    returnSelectByDateList.setDate(date);
+                    List<Doctor> doctors = appointmentService.getDoctorListByDepartment(department);
+                    List<Doctor> doctors1 = appointmentService.getDoctorListByDepartmentAndDate(doctors, date);
+                    lists.add(doctors1);
+                    System.out.println(date);
+                    returnSelectByDateList.setDoctors(doctors1);
+                    returnSelectByDate.addList(returnSelectByDateList);
 
+                }
+                c1.add(Calendar.DATE, 1);
+                }
+            return returnSelectByDate;
+        }
+        catch (Exception e){
+            returnSelectByDate.setCode(400);
+            return returnSelectByDate;
+        }
+    }
 
 }

@@ -3,16 +3,17 @@ package org.csu.hospital;
 import com.alibaba.fastjson.JSON;
 import io.swagger.models.auth.In;
 import org.csu.hospital.common.security.JwtTokenUtil;
+import org.csu.hospital.domain.Doctor;
 import org.csu.hospital.domain.Manager;
 import org.csu.hospital.domain.Patient;
 import org.csu.hospital.persistence.AccountMapper;
 import org.csu.hospital.service.AccountService;
+import org.csu.hospital.service.AppointmentService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @SpringBootTest
 class HospitalApplicationTests {
@@ -57,5 +58,33 @@ class HospitalApplicationTests {
         String a = JSON.toJSONString(map);
         System.out.println(a);
     }
+
+
+
+
+
+    @Test
+    void split(){
+        String item= "a,a_content;b,b_content;c,c_content";
+
+        ArrayList<String> mArrayList = new ArrayList<String>();
+
+        String[] splitStrings = item.split(";");
+        for (int i = 0; i < splitStrings.length; i++) {
+            System.out.println(splitStrings[i]);
+        }
+    }
+
+    @Test
+    void date() {
+        Calendar c1 = Calendar.getInstance();
+        c1.set(2009, 6 - 1, 30);
+        c1.add(Calendar.DATE, 1);
+        int date = c1.get(Calendar.MONTH) + 1;
+        System.out.println(date);
+        System.out.println("rearcher");
+    }
+
+
 
 }
