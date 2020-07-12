@@ -1,6 +1,8 @@
 package org.csu.hospital.controller;
 
 import org.csu.hospital.domain.ReturnCode;
+import org.csu.hospital.domain.ReturnDepartments;
+import org.csu.hospital.domain.ReturnOperationRoomsInfo;
 import org.csu.hospital.service.OperationRoomsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +28,22 @@ public class ManageOperationRoomsController {
             returnCode.setCode(400);
             return returnCode;
         }
-
     }
+
+    //获取所有手术室信息
+    @GetMapping("/operationRooms")
+    @ResponseBody
+    public ReturnOperationRoomsInfo getOperationRoomsInfo(){
+        ReturnOperationRoomsInfo returnOperationRoomsInfo = new ReturnOperationRoomsInfo();
+        try{
+            returnOperationRoomsInfo.setCode(200);
+            returnOperationRoomsInfo.setOperationRoomList(operationRoomsService.getOperationRoomsInfo());
+            return returnOperationRoomsInfo;
+        }
+        catch (Exception e){
+            returnOperationRoomsInfo.setCode(400);
+            return returnOperationRoomsInfo;
+        }
+    }
+
 }

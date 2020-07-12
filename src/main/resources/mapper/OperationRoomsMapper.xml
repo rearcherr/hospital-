@@ -9,4 +9,12 @@
             roomId = #{roomId}
         WHERE roomId = #{id}
     </update>
+
+    <select id="getOperationRoomsInfo" resultType="Operatingroom">
+        select
+        *
+        from operatingroom
+    </select>
+
+
 </mapper>
