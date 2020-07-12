@@ -187,4 +187,25 @@ public class AppointmentController {
         }
     }
 
+    //挂号
+    @PostMapping("/doAppointment")
+    @ResponseBody
+    public ReturnCode doAppointment(@RequestParam("id")long patId,@RequestParam("doctor_id")long docId,@RequestParam("date")String time){
+        Registeredrecord registeredrecord = new Registeredrecord();
+        registeredrecord.setPatId(patId);
+        registeredrecord.setDocId(docId);
+        registeredrecord.setTime(time);
+        ReturnCode returnCode = new ReturnCode();
+
+        try{
+            appointmentService.doAppointment(registeredrecord);
+            returnCode.setCode(200);
+            return returnCode;
+        }
+        catch (Exception e){
+            returnCode.setCode(400);
+            return returnCode;
+        }
+    }
+
 }

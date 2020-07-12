@@ -14,4 +14,5 @@ public interface DoctorMapper {
 //    List<Doctor> getDoctorListByDepartmentAndDate(List<Doctor> doctors);
     List<Registeredrecord> getRegisterDate();
     List<String> getDoctorRegisterTime(long docId);
+    void doAppointment (Registeredrecord registeredrecord);
 }

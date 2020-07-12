@@ -29,4 +29,11 @@
         where docId = #{value}
     </select>
 
+    <insert id="doAppointment" parameterType="Registeredrecord">
+        INSERT INTO registeredrecord
+            (docId, patId, time)
+        VALUES(
+            #{docId}, #{patId}, #{time})
+    </insert>
+
 </mapper>

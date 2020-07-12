@@ -78,4 +78,8 @@ public class AppointmentService {
         return doctorMapper.getDoctorRegisterTime(docId);
     }
 
+    public void doAppointment(Registeredrecord registeredrecord){
+        doctorMapper.doAppointment(registeredrecord);
+
+    }
 }
