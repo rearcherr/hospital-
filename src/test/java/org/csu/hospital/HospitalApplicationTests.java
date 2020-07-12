@@ -1,18 +1,17 @@
 package org.csu.hospital;
 
 import com.alibaba.fastjson.JSON;
-import io.swagger.models.auth.In;
 import org.csu.hospital.common.security.JwtTokenUtil;
-import org.csu.hospital.domain.Doctor;
+import org.csu.hospital.domain.Bill;
 import org.csu.hospital.domain.Manager;
-import org.csu.hospital.domain.Patient;
 import org.csu.hospital.persistence.AccountMapper;
+import org.csu.hospital.persistence.BillMapper;
 import org.csu.hospital.service.AccountService;
-import org.csu.hospital.service.AppointmentService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 @SpringBootTest
@@ -23,6 +22,9 @@ class HospitalApplicationTests {
 
     @Autowired
     AccountMapper accountMapper;
+
+    @Autowired
+    BillMapper billMapper;
 
     @Test
     void contextLoads() {
@@ -83,6 +85,17 @@ class HospitalApplicationTests {
         int date = c1.get(Calendar.MONTH) + 1;
         System.out.println(date);
         System.out.println("rearcher");
+    }
+
+    @Test
+    void order(){
+        System.out.println(billMapper.getBills());
+        Bill bill = new Bill();
+        bill.setDate(new Date());
+        bill.setTotalPrice(new BigDecimal(123));
+        bill.setStatus(1);
+        bill.setPatient(3);
+        billMapper.createBills(bill);
     }
 
 

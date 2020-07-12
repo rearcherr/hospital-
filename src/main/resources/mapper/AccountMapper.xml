@@ -15,5 +15,4 @@
         from patient
         where patId = #{username} and patPwd = #{password}
     </select>
-
 </mapper>
