@@ -2,6 +2,7 @@ package org.csu.hospital.domain;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 public class Bill {
     int id;
@@ -10,6 +11,7 @@ public class Bill {
     Date date;
     int type;
     int patient;
+    List<BillItem> billItems;
 
     public int getId() {
         return id;
@@ -57,5 +59,13 @@ public class Bill {
 
     public void setPatient(int patient) {
         this.patient = patient;
+    }
+
+    public List<BillItem> getBillItems() {
+        return billItems;
+    }
+
+    public void setBillItems(List<BillItem> billItems) {
+        this.billItems = billItems;
     }
 }

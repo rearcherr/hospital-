@@ -6,7 +6,9 @@ import org.csu.hospital.domain.Bill;
 import org.csu.hospital.domain.Manager;
 import org.csu.hospital.persistence.AccountMapper;
 import org.csu.hospital.persistence.BillMapper;
+import org.csu.hospital.persistence.MedicineMapper;
 import org.csu.hospital.service.AccountService;
+import org.csu.hospital.service.BillService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,6 +27,12 @@ class HospitalApplicationTests {
 
     @Autowired
     BillMapper billMapper;
+
+    @Autowired
+    MedicineMapper medicineMapper;
+
+    @Autowired
+    BillService billService;
 
     @Test
     void contextLoads() {
@@ -89,13 +97,23 @@ class HospitalApplicationTests {
 
     @Test
     void order(){
-        System.out.println(billMapper.getBills());
-        Bill bill = new Bill();
-        bill.setDate(new Date());
-        bill.setTotalPrice(new BigDecimal(123));
-        bill.setStatus(1);
-        bill.setPatient(3);
-        billMapper.createBills(bill);
+//        System.out.println(billMapper.getBills());
+//        Bill bill = new Bill();
+//        bill.setDate(new Date());
+//        bill.setTotalPrice(new BigDecimal(123));
+//        bill.setStatus(1);
+//        bill.setPatient(3);
+//        billMapper.createBills(bill);
+        List<Bill> billList = billService.getBillsByPatient(3);
+        for (Bill bill:billList
+             ) {
+            System.out.println(bill.getTotalPrice());
+        }
+
+    }
+    @Test
+    void medicine(){
+        System.out.println(medicineMapper.getPriceByMedicineId(1));
     }
 
 

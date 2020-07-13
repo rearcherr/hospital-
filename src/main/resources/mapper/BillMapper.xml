@@ -6,7 +6,7 @@
 
     <insert id="createBills" parameterType="org.csu.hospital.domain.Bill">
         INSERT INTO
-        `bill`
+        `order`
         VALUES
         (#{id},#{totalPrice},#{status},#{date},#{type},#{patient}) ;
     </insert>
@@ -14,6 +14,22 @@
         select
         *
         from
-        `bill`
+        `order`
+    </select>
+    <select id="getBillsByPatient" parameterType="int" resultType="org.csu.hospital.domain.Bill">
+        SELECT
+        *
+        FROM
+        `order`
+        WHERE
+        patient = #{id}
+    </select>
+    <select id="getBillItemsByBill" resultType="org.csu.hospital.domain.BillItem">
+        SELECT
+        *
+        FROM
+        orderitem
+        WHERE
+        orderId = #{id}
     </select>
 </mapper>
