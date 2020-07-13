@@ -1,9 +1,12 @@
 package org.csu.hospital.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Operatingroom {
 
   private long roomId;
+
   private String using;
 
 

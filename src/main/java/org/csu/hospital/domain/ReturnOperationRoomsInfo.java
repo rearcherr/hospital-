@@ -1,9 +1,12 @@
 package org.csu.hospital.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 public class ReturnOperationRoomsInfo {
     private int code;
+    @JsonProperty("operationRoomList")
     private List<Operatingroom> operationRoomList;
 
     public int getCode() {
