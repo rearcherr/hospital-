@@ -9,16 +9,21 @@
         From Patient
         WHERE  patTel = #{value}
     </select>
-    <select id="getPatientByPatId" parameterType="int" resultType="Patient">
+    <select id="getMedicalRecordByPatient" resultType="org.csu.hospital.domain.MedicalRecord">
         SELECT
         *
-        From Patient
-        WHERE  patId = #{value}
+        FROM
+        medicalrecords
+        WHERE
+        patId = #{patientId}
     </select>
-    <select id="getOperationRoomsInfo" resultType="Patient">
+    <select id="getItemListByRecord" resultType="org.csu.hospital.domain.MedicalRecordItem">
         SELECT
         *
-        From Patient
+        FROM
+        medicalrecorditems
+        WHERE
+        recId = #{recId}
     </select>
     <insert id="insertPatient" parameterType="Patient">
         INSERT INTO PATIENT
@@ -26,17 +31,4 @@
         VALUES(
             #{patName},#{patTel}, #{patPwd})
     </insert>
-
-    <update id="UpdatePatient" parameterType="Patient">
-    UPDATE PATIENT SET
-    patName = #{patName},
-    patGender = #{patGender},
-    patAge = #{patAge},
-    patPwd = #{patPwd},
-    patDeposit = #{patDeposit},
-    patDate = #{patDate},
-    patTel = #{patTel}
-    WHERE patId = #{patId}
-    </update>
-
 </mapper>
