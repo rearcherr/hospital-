@@ -21,7 +21,7 @@ public class BillController {
     @ResponseBody
     @ResponseStatus(value = HttpStatus.OK)
     public String getBill(int id) {
-        return JSON.toJSONString(billService.getBills());
+        return JSON.toJSONString(billService.getBillsByPatient(id));
     }
 
 }

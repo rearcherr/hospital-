@@ -5,10 +5,21 @@ import com.alibaba.fastjson.annotation.JSONField;
 import java.util.List;
 
 public class MedicalRecord {
-    int recId;
     @JSONField(name = "id")
+    int recId;
     int patId;
+    @JSONField(name = "name")
+    String patName;
+    @JSONField(name = "entries")
     List<MedicalRecordItem> medicalRecordItems;
+
+    public String getPatName() {
+        return patName;
+    }
+
+    public void setPatName(String patName) {
+        this.patName = patName;
+    }
 
     public int getRecId() {
         return recId;

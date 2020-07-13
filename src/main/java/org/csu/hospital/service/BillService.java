@@ -26,19 +26,12 @@ public class BillService {
 
     public List<Bill> getBillsByPatient(int id) {
         List<Bill> billList = billMapper.getBillsByPatient(id);
-//        BigDecimal totalPrice;
-//        for (Bill bill :
-//                billList
-//        ) {
-//            bill.setBillItems(billMapper.getBillItemsByBill(bill.getId()));
-//            totalPrice = new BigDecimal(0);
-//            for (BillItem billItem : bill.getBillItems()
-//            ) {
-//                totalPrice.add(new BigDecimal(billItem.getAmount()*medicineMapper.getPriceByMedicineId(billItem.getId())));
-//            }
-//        }
+        for (Bill bill :
+                billList
+        ) {
+            bill.setBillItems(billMapper.getBillItemsByBill(bill.getId()));
+        }
         return billList;
-
     }
 
 }

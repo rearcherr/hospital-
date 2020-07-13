@@ -19,27 +19,31 @@ public class PatientService {
     @Autowired
     MedicineMapper medicineMapper;
 
-    public Patient getPatientByPatId(int patId){
+    public Patient getPatientByPatId(int patId) {
         return patientMapper.getPatientByPatId(patId);
     }
-    public void UpdatePatient(Patient patient){
-            patientMapper.UpdatePatient(patient);
+
+    public void UpdatePatient(Patient patient) {
+        patientMapper.UpdatePatient(patient);
     }
-    public List<Patient> getPatientInfo(){
-            return patientMapper.getOperationRoomsInfo();
+
+    public List<Patient> getPatientInfo() {
+        return patientMapper.getOperationRoomsInfo();
     }
-    public List<MedicalRecordItem> getItemListByRecord(int id){
+
+    public List<MedicalRecordItem> getItemListByRecord(int id) {
         List<MedicalRecordItem> medicalRecordItems = patientMapper.getItemListByRecord(id);
-        for (MedicalRecordItem item:medicalRecordItems
-             ) {
+        for (MedicalRecordItem item : medicalRecordItems
+        ) {
             item.setMedicine(medicineMapper.getMedicineById(item.getMedId()));
         }
         return medicalRecordItems;
     }
 
-    public MedicalRecord getMedicalRecordsByPatient(int id){
+    public MedicalRecord getMedicalRecordsByPatient(int id) {
         MedicalRecord medicalRecord;
         medicalRecord = patientMapper.getMedicalRecordByPatient(id);
+        medicalRecord.setPatName(patientMapper.getPatientByPatId(medicalRecord.getPatId()).getPatName());
         medicalRecord.setMedicalRecordItems(getItemListByRecord(medicalRecord.getRecId()));
         return medicalRecord;
     }

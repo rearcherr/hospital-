@@ -5,7 +5,9 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.csu.hospital.common.security.JwtTokenUtil;
 import org.csu.hospital.domain.Bill;
+import org.csu.hospital.domain.BillItem;
 import org.csu.hospital.domain.Manager;
+import org.csu.hospital.domain.MedicalRecordItem;
 import org.csu.hospital.persistence.*;
 import org.csu.hospital.service.AccountService;
 import org.csu.hospital.service.BillService;
@@ -141,8 +143,10 @@ class HospitalApplicationTests {
     }
     @Test
     void testSql(){
-        List<Bill> billList = fundMapper.getBillsInSomeDays(3);
-        System.out.println(billList);
+//        List<Bill> billList = fundMapper.getBillsInSomeDays(3);
+//        System.out.println(billList);
+        List<BillItem> medicalRecordItems = billMapper.getBillItemsByBill(1);
+        System.out.println(medicalRecordItems.get(0).getName());
     }
 
 

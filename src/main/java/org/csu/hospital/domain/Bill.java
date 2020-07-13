@@ -1,5 +1,7 @@
 package org.csu.hospital.domain;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -11,6 +13,7 @@ public class Bill {
     Date date;
     int type;
     int patient;
+    @JSONField(name = "bill")
     List<BillItem> billItems;
 
     public int getId() {
