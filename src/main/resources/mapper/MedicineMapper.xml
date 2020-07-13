@@ -12,4 +12,12 @@
         WHERE
         medId = #{id}
     </select>
+    <select id="getMedicineById" resultType="org.csu.hospital.domain.Medicine">
+        SELECT
+        *
+        FROM
+        medicine
+        WHERE
+        medId = #{id}
+    </select>
 </mapper>

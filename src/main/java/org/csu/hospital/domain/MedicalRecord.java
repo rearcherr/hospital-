@@ -1,9 +1,12 @@
 package org.csu.hospital.domain;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.util.List;
 
 public class MedicalRecord {
     int recId;
+    @JSONField(name = "id")
     int patId;
     List<MedicalRecordItem> medicalRecordItems;
 
