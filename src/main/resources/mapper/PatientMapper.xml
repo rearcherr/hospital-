@@ -9,10 +9,34 @@
         From Patient
         WHERE  patTel = #{value}
     </select>
+    <select id="getPatientByPatId" parameterType="int" resultType="Patient">
+        SELECT
+        *
+        From Patient
+        WHERE  patId = #{value}
+    </select>
+    <select id="getOperationRoomsInfo" resultType="Patient">
+        SELECT
+        *
+        From Patient
+    </select>
     <insert id="insertPatient" parameterType="Patient">
         INSERT INTO PATIENT
         (patName, patTel,patPwd)
         VALUES(
             #{patName},#{patTel}, #{patPwd})
     </insert>
+
+    <update id="UpdatePatient" parameterType="Patient">
+    UPDATE PATIENT SET
+    patName = #{patName},
+    patGender = #{patGender},
+    patAge = #{patAge},
+    patPwd = #{patPwd},
+    patDeposit = #{patDeposit},
+    patDate = #{patDate},
+    patTel = #{patTel}
+    WHERE patId = #{patId}
+    </update>
+
 </mapper>
