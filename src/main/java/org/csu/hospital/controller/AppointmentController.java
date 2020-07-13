@@ -1,6 +1,7 @@
 package org.csu.hospital.controller;
 
 import org.csu.hospital.domain.*;
+import org.csu.hospital.service.AccountService;
 import org.csu.hospital.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,9 @@ public class AppointmentController {
 
     @Autowired
     private AppointmentService appointmentService;
+
+    @Autowired
+    private AccountService accountService;
 
 //    @GetMapping("/selectByDoctors")
 //    @ResponseBody
@@ -40,7 +44,8 @@ public class AppointmentController {
             if (pwd.equals(patPwd)) {
                 code = 200;
                int a = (int)((Math.random()*9+1)*10000);
-               String token = Integer.toString(a);
+               String token = accountService.getToken(patTel);
+//               String token = Integer.toString(a);
                returnLog = new ReturnLog(code,token);
             } else{
                 code = 300;
