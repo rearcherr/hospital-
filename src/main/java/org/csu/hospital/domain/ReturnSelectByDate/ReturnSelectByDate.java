@@ -1,4 +1,4 @@
-package org.csu.hospital.domain;
+package org.csu.hospital.domain.ReturnSelectByDate;
 
 import java.util.List;
 

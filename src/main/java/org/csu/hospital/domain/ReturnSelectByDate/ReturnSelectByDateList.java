@@ -1,10 +1,12 @@
-package org.csu.hospital.domain;
+package org.csu.hospital.domain.ReturnSelectByDate;
+
+import org.csu.hospital.domain.Doctor;
 
 import java.util.List;
 
 public class ReturnSelectByDateList {
     private String date;
-    private List<Doctor> doctors;
+    private List<ReturnDocInfomation> doctors;
 
     public String getDate() {
         return date;
@@ -14,11 +16,11 @@ public class ReturnSelectByDateList {
         this.date = date;
     }
 
-    public List<Doctor> getDoctors() {
+    public List<ReturnDocInfomation> getDoctors() {
         return doctors;
     }
 
-    public void setDoctors(List<Doctor> doctors) {
+    public void setDoctors(List<ReturnDocInfomation> doctors) {
         this.doctors = doctors;
     }
 }

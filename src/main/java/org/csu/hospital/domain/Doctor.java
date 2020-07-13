@@ -14,6 +14,8 @@ public class Doctor {
   private String onDuty;
   private String offDuty;
   private double wage;
+  private String docDesc;
+  private String docImage;
 
 
   public long getDocId() {
@@ -114,4 +116,19 @@ public class Doctor {
     this.wage = wage;
   }
 
+  public String getDocDesc() {
+    return docDesc;
+  }
+
+  public void setDocDesc(String docDesc) {
+    this.docDesc = docDesc;
+  }
+
+  public String getDocImage() {
+    return docImage;
+  }
+
+  public void setDocImage(String docImage) {
+    this.docImage = docImage;
+  }
 }

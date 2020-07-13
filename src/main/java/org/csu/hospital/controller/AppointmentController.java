@@ -1,17 +1,20 @@
 package org.csu.hospital.controller;
 
 import org.csu.hospital.domain.*;
+import org.csu.hospital.domain.ReturnSelectByDate.ReturnDocInfomation;
+import org.csu.hospital.domain.ReturnSelectByDate.ReturnSelectByDate;
+import org.csu.hospital.domain.ReturnSelectByDate.ReturnSelectByDateList;
+import org.csu.hospital.domain.ReturnSelectByDoctors.ReturnDoctorInfo;
+import org.csu.hospital.domain.ReturnSelectByDoctors.ReturnDoctorInfoByDoctor;
+import org.csu.hospital.domain.ReturnSelectByDoctors.ReturnSelectByDoctors;
 import org.csu.hospital.service.AccountService;
 import org.csu.hospital.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -103,7 +106,7 @@ public class AppointmentController {
     //按日期选择(日期的格式是 2020-6-2 这种的）
     @GetMapping("/selectByDate")
     @ResponseBody
-    public ReturnSelectByDate selectByDate(@RequestParam("date")String date,@RequestParam("office")String department){
+    public ReturnSelectByDate selectByDate(@RequestParam("date")String date, @RequestParam("office")String department){
 //        List<Doctor> doctors = appointmentService.getDoctorListByDepartment(department);
         String[] splitStrings = date.split("-");
         ReturnSelectByDate returnSelectByDate = new ReturnSelectByDate();
@@ -132,9 +135,18 @@ public class AppointmentController {
                     List<Doctor> doctors1 = appointmentService.getDoctorListByDepartmentAndDate(doctors, date);
                     lists.add(doctors1);
                     System.out.println(date);
-                    returnSelectByDateList.setDoctors(doctors1);
+                    List<ReturnDocInfomation> returnDocInfomations = new ArrayList<ReturnDocInfomation>();
+                    for(int k = 0;k<doctors1.size();k++){
+                        ReturnDocInfomation returnDocInfomation = new ReturnDocInfomation();
+                        returnDocInfomation.setDoctor_id(doctors1.get(k).getDocId());
+                        returnDocInfomation.setDoctor_name(doctors1.get(k).getDocName());
+                        returnDocInfomation.setDoctor_degree(doctors1.get(k).getDocRank());
+                        returnDocInfomation.setDoctor_desc(doctors1.get(k).getDocDesc());
+                        returnDocInfomation.setDoctor_image(doctors1.get(k).getDocImage());
+                        returnDocInfomations.add(returnDocInfomation);
+                    }
+                    returnSelectByDateList.setDoctors(returnDocInfomations);
                     returnSelectByDate.addList(returnSelectByDateList);
-
                 }
                 c1.add(Calendar.DATE, 1);
                 }
@@ -149,7 +161,7 @@ public class AppointmentController {
     //按医生选择(日期的格式是 2020-6-2 这种的）
     @GetMapping("/selectByDoctors")
     @ResponseBody
-    public ReturnSelectByDoctors selectByDoctors(@RequestParam("date")String date,@RequestParam("office")String department){
+    public ReturnSelectByDoctors selectByDoctors(@RequestParam("date")String date, @RequestParam("office")String department){
         String[] splitStrings = date.split("-");
         ReturnSelectByDoctors returnSelectByDoctors = new ReturnSelectByDoctors();
         List<ReturnDoctorInfo> doctorInfos = new ArrayList<ReturnDoctorInfo>();
@@ -180,8 +192,15 @@ public class AppointmentController {
 
                 }
                 ReturnDoctorInfo returnDoctorInfo = new ReturnDoctorInfo();
-                returnDoctorInfo.setDoctor(doctor);
-                returnDoctorInfo.setTimeForbit(time1);
+                ReturnDoctorInfoByDoctor returnDoctorInfoByDoctor = new ReturnDoctorInfoByDoctor();
+                returnDoctorInfoByDoctor.setTimeForbit(time1);
+                returnDoctorInfoByDoctor.setDoctor_id(doctor.getDocId());
+                returnDoctorInfoByDoctor.setDoctor_degree(doctor.getDocRank());
+                returnDoctorInfoByDoctor.setDoctor_image(doctor.getDocImage());
+                returnDoctorInfoByDoctor.setDoctor_desc(doctor.getDocDesc());
+                returnDoctorInfoByDoctor.setDoctor_name(doctor.getDocName());
+                returnDoctorInfo.setReturnDoctorInfoByDoctor(returnDoctorInfoByDoctor);
+
                 returnSelectByDoctors.addDoctors(returnDoctorInfo);
             }
             return returnSelectByDoctors;

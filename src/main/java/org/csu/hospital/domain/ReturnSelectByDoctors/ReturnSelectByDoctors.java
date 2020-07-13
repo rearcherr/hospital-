@@ -1,4 +1,4 @@
-package org.csu.hospital.domain;
+package org.csu.hospital.domain.ReturnSelectByDoctors;
 
 import java.util.List;
 
