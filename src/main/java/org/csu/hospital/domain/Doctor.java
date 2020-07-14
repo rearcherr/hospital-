@@ -11,8 +11,8 @@ public class Doctor {
   private String docDepartment;
   private String docRank;
   private String docTel;
-  private String onDuty;
-  private String offDuty;
+  private boolean onDuty;
+//  private String offDuty;
   private double wage;
   private String docDesc;
   private String docImage;
@@ -90,23 +90,13 @@ public class Doctor {
   }
 
 
-  public String getOnDuty() {
+  public boolean isOnDuty() {
     return onDuty;
   }
 
-  public void setOnDuty(String onDuty) {
+  public void setOnDuty(boolean onDuty) {
     this.onDuty = onDuty;
   }
-
-
-  public String getOffDuty() {
-    return offDuty;
-  }
-
-  public void setOffDuty(String offDuty) {
-    this.offDuty = offDuty;
-  }
-
 
   public double getWage() {
     return wage;
