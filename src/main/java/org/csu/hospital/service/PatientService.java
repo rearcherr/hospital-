@@ -67,4 +67,8 @@ public class PatientService {
         return pageInfo;
     }
 
+    public void deletePatients(int patId){
+        patientMapper.deletePatients(patId);
+    }
+
 }
