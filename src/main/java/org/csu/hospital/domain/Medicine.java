@@ -5,15 +5,17 @@ import com.alibaba.fastjson.annotation.JSONField;
 import java.math.BigDecimal;
 
 public class Medicine {
+    @JSONField(name = "id")
     int medId;
-    @JSONField(name = "drug_name")
+    @JSONField(name = "name")
     String medName;
-    @JSONField(name = "drug_image")
+    @JSONField(name = "image")
     String medImg;
-    @JSONField(name = "drug_price")
+    @JSONField(name = "price")
     BigDecimal medPrice;
+    @JSONField(name = "quantity")
     int medStore;
-    @JSONField(name = "drug_desc")
+    @JSONField(name = "description")
     String medDesc;
 
     public String getMedDesc() {
