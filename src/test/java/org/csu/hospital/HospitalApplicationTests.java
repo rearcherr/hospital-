@@ -9,6 +9,7 @@ import org.csu.hospital.domain.Manager;
 import org.csu.hospital.persistence.*;
 import org.csu.hospital.service.AccountService;
 import org.csu.hospital.service.BillService;
+import org.csu.hospital.service.MedicineService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -38,6 +39,9 @@ class HospitalApplicationTests {
 
     @Autowired
     FundMapper fundMapper;
+
+    @Autowired
+    MedicineService medicineService;
 
     @Test
     void contextLoads() {
@@ -144,8 +148,7 @@ class HospitalApplicationTests {
 //        System.out.println(billList);
 //        List<BillItem> medicalRecordItems = billMapper.getBillItemsByBill(1);
 //        System.out.println(medicalRecordItems.get(0).getName());
-
-        System.out.println(fundMapper.getTotalAtSomeDaysBefore(4));
+        System.out.println(medicineService.getPurchaseRecordByPage(0,2));
     }
 
 

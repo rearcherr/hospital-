@@ -20,4 +20,17 @@
         WHERE
         medId = #{id}
     </select>
+    <select id="getPurchaseRecordByPage" resultType="org.csu.hospital.domain.PurchaseRecord">
+        SELECT
+        *
+        FROM
+        purchaserecords
+        LIMIT #{pagesize} OFFSET #{pagenum}
+    </select>
+    <select id="getPurchaseRecordNum" resultType="java.lang.Integer">
+        SELECT
+        count(*)
+        FROM
+        purchaserecords
+    </select>
 </mapper>
