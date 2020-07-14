@@ -1,7 +1,9 @@
 package org.csu.hospital.domain.ReturnSelectByDate;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
+import java.util.List;
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ReturnSelectByDate {
     private int code;
     private List<ReturnSelectByDateList> list;

@@ -1,7 +1,9 @@
 package org.csu.hospital.domain.ReturnSelectByDoctors;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
+import java.util.List;
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ReturnSelectByDoctors {
     private int code;
     private List<ReturnDoctorInfo> doctors;

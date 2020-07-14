@@ -1,14 +1,21 @@
 package org.csu.hospital.controller;
 
+import com.github.pagehelper.PageInfo;
+import org.csu.hospital.domain.Meta;
 import org.csu.hospital.domain.Patient;
-import org.csu.hospital.domain.ReturnAllPatientInfo;
-import org.csu.hospital.domain.ReturnPatientUpdate;
+import org.csu.hospital.domain.ReturnPatientInfo.ReturnPatientInfo;
+import org.csu.hospital.domain.ReturnPatientInfo.ReturnPatientInfoDate;
+import org.csu.hospital.domain.ReturnPatientInfo.ReturnPatientInfoDateList;
+import org.csu.hospital.domain.ReturnPatientInfoById.ReturnPatientInfoById;
+import org.csu.hospital.domain.ReturnPatientInfoById.ReturnPatientInfoByIdData;
+import org.csu.hospital.domain.ReturnPatientUpdate.ReturnPatientUpdate;
+import org.csu.hospital.domain.ReturnPatientUpdate.ReturnPatientUpdateData;
 import org.csu.hospital.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -17,35 +24,124 @@ public class ManagePatientInfoController {
     @Autowired
     private PatientService patientService;
 
-//获取所有病人信息
+//获取病人信息
     @GetMapping("/patients")
     @ResponseBody
-    public ReturnAllPatientInfo getPatientInfo(){
-        ReturnAllPatientInfo returnAllPatientInfo = new ReturnAllPatientInfo();
+    public ReturnPatientInfo getPatientInfo(@RequestParam(value = "query", required = false)Integer query,@RequestParam("pagenum")int pageNum, @RequestParam("pagesize")int pageSize){
+        ReturnPatientInfo returnPatientInfo = new ReturnPatientInfo();
         try {
-            returnAllPatientInfo.setCode(200);
-            returnAllPatientInfo.setPatientList(patientService.getPatientInfo());
-            return returnAllPatientInfo;
+            if(query==null) {
+                Meta meta = new Meta();
+                ReturnPatientInfoDate returnPatientInfoDate = new ReturnPatientInfoDate();
+                meta.setStatus(200);
+                meta.setMsg("获取成功");
+
+                PageInfo<Patient> patientPageInfo = patientService.findAllPatients(pageNum,pageSize);
+                List<Patient> patients = patientPageInfo.getList();
+                List<ReturnPatientInfoDateList> returnPatientInfoDateLists = new ArrayList<ReturnPatientInfoDateList>();
+                for(int i=0;i<patients.size();i++){
+                    Patient patient = patients.get(i);
+                    ReturnPatientInfoDateList returnPatientInfoDateList = new ReturnPatientInfoDateList();
+                    returnPatientInfoDateList.setId(patient.getPatId());
+                    returnPatientInfoDateList.setName(patient.getPatName());
+                    returnPatientInfoDateList.setPatGender(patient.getPatGender());
+                    returnPatientInfoDateList.setPhone(patient.getPatName());
+                    returnPatientInfoDateLists.add(returnPatientInfoDateList);
+                }
+                returnPatientInfoDate.setReturnPatientInfoDateLists(returnPatientInfoDateLists);
+                returnPatientInfoDate.setTotalpage(patientPageInfo.getPages());
+                returnPatientInfoDate.setPagenum(patientPageInfo.getPageNum());
+                returnPatientInfo.setMeta(meta);
+                returnPatientInfo.setReturnPatientInfoDate(returnPatientInfoDate);
+
+                return returnPatientInfo;
+            }
+            else {
+                Meta meta = new Meta();
+                ReturnPatientInfoDate returnPatientInfoDate = new ReturnPatientInfoDate();
+                meta.setStatus(200);
+                meta.setMsg("获取成功");
+
+                PageInfo<Patient> patientPageInfo = patientService.findAllPatientsByPatId(query,pageNum,pageSize);
+                List<Patient> patients = patientPageInfo.getList();
+                List<ReturnPatientInfoDateList> returnPatientInfoDateLists = new ArrayList<ReturnPatientInfoDateList>();
+                for(int i=0;i<patients.size();i++){
+                    Patient patient = patients.get(i);
+                    ReturnPatientInfoDateList returnPatientInfoDateList = new ReturnPatientInfoDateList();
+                    returnPatientInfoDateList.setId(patient.getPatId());
+                    returnPatientInfoDateList.setName(patient.getPatName());
+                    returnPatientInfoDateList.setPatGender(patient.getPatGender());
+                    returnPatientInfoDateList.setPhone(patient.getPatName());
+                    returnPatientInfoDateLists.add(returnPatientInfoDateList);
+                }
+                returnPatientInfoDate.setReturnPatientInfoDateLists(returnPatientInfoDateLists);
+                returnPatientInfoDate.setTotalpage(patientPageInfo.getPages());
+                returnPatientInfoDate.setPagenum(patientPageInfo.getPageNum());
+                returnPatientInfo.setMeta(meta);
+                returnPatientInfo.setReturnPatientInfoDate(returnPatientInfoDate);
+
+                return returnPatientInfo;
+            }
         }
         catch (Exception e){
-            returnAllPatientInfo.setCode(400);
-            return returnAllPatientInfo;
+            Meta meta = new Meta();
+            meta.setStatus(400);
+            meta.setMsg("获取失败");
+            returnPatientInfo.setMeta(meta);
+            return returnPatientInfo;
         }
     }
 
-    //修改病人信息
-    @PutMapping("/patients/{patientId}")
+    //根据id获取病人信息
+    @GetMapping("/patients/{id}")
     @ResponseBody
-    public ReturnPatientUpdate update (@PathVariable("patientId")int patientId,@RequestParam(value = "patName", required = false)String patName,
-                        @RequestParam(value = "patGender", required = false)String patGender,
-                        @RequestParam(value = "patAge", required = false)Integer patAge,
-                        @RequestParam(value = "patPwd", required = false)String patPwd,
-                        @RequestParam(value = "patDeposit", required = false)Integer patDeposit,
-                        @RequestParam(value = "patDate", required = false) java.sql.Date patDate,
-                        @RequestParam(value = "patTel", required = false)String patTel){
+    public ReturnPatientInfoById getPatientInfoById(@PathVariable("id")Integer id){
+        ReturnPatientInfoById returnPatientInfoById = new ReturnPatientInfoById();
+        try {
+            ReturnPatientInfoByIdData returnPatientInfoByIdData = new ReturnPatientInfoByIdData();
+            Meta meta = new Meta();
+
+            meta.setStatus(200);
+            meta.setMsg("获取成功");
+            Patient patient = patientService.getPatientByPatId(id);
+            returnPatientInfoByIdData.setId(patient.getPatId());
+            returnPatientInfoByIdData.setAge(patient.getPatAge());
+            returnPatientInfoByIdData.setDate(patient.getPatDate());
+            returnPatientInfoByIdData.setName(patient.getPatName());
+            returnPatientInfoByIdData.setPatGender(patient.getPatGender());
+            returnPatientInfoByIdData.setPhone(patient.getPatName());
+            returnPatientInfoById.setMeta(meta);
+            returnPatientInfoById.setReturnPatientInfoByIdData(returnPatientInfoByIdData);
+            return returnPatientInfoById;
+        }
+        catch (Exception e){
+            Meta meta = new Meta();
+
+            meta.setStatus(400);
+            meta.setMsg("获取失败");
+            returnPatientInfoById.setMeta(meta);
+            return returnPatientInfoById;
+        }
+
+    }
+
+
+
+    //修改病人信息
+    @PutMapping("/patients/{id}")
+    @ResponseBody
+    public ReturnPatientUpdate update (@PathVariable("id")int patId,@RequestParam(value = "name", required = false)String patName,
+                        @RequestParam(value = "gender", required = false)String patGender,
+                        @RequestParam(value = "age", required = false)Integer patAge,
+                        @RequestParam(value = "date", required = false) java.sql.Date patDate,
+                        @RequestParam(value = "phone", required = false)String patTel){
         ReturnPatientUpdate returnPatientUpdate = new ReturnPatientUpdate();
         try {
-            Patient patient = patientService.getPatientByPatId(patientId);
+            Meta meta = new Meta();
+            meta.setMsg("更新成功");
+            meta.setStatus(200);
+
+            Patient patient = patientService.getPatientByPatId(patId);
             if (patName != null) {
                 patient.setPatName(patName);
             }
@@ -55,12 +151,7 @@ public class ManagePatientInfoController {
             if (patAge != null) {
                 patient.setPatAge(patAge);
             }
-            if (patPwd != null) {
-                patient.setPatPwd(patPwd);
-            }
-            if (patDeposit != null) {
-                patient.setPatDeposit(patDeposit);
-            }
+
             if (patDate != null) {
                 patient.setPatDate(patDate);
             }
@@ -68,13 +159,23 @@ public class ManagePatientInfoController {
                 patient.setPatTel(patTel);
             }
             patientService.UpdatePatient(patient);
-            Patient patient1 = patientService.getPatientByPatId(patientId);
-            returnPatientUpdate.setCode(200);
-            returnPatientUpdate.setPatient(patient1);
+            Patient patient1 = patientService.getPatientByPatId(patId);
+            ReturnPatientUpdateData returnPatientUpdateData = new ReturnPatientUpdateData();
+            returnPatientUpdateData.setId(patient1.getPatId());
+            returnPatientUpdateData.setName(patient1.getPatName());
+            returnPatientUpdateData.setPatGender(patient1.getPatGender());
+            returnPatientUpdateData.setPhone(patient1.getPatTel());
+
+            returnPatientUpdate.setMeta(meta);
+            returnPatientUpdate.setReturnPatientUpdateData(returnPatientUpdateData);
+
             return returnPatientUpdate;
         }
         catch (Exception e){
-            returnPatientUpdate.setCode(400);
+            Meta meta = new Meta();
+            meta.setMsg("更新失败");
+            meta.setStatus(500);
+            returnPatientUpdate.setMeta(meta);
             return returnPatientUpdate;
         }
     }
