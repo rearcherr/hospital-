@@ -48,4 +48,12 @@ public class MedicineService {
     public void updateMedicine(Medicine medicine) {
         medicineMapper.updateMedicine(medicine);
     }
+
+    public void deleteMedicine(int id){
+        medicineMapper.deleteMedicine(id);
+    }
+    public Medicine getMedicine(int id){
+        return  medicineMapper.getMedicineById(id);
+    }
+
 }

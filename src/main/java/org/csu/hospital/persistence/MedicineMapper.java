@@ -15,4 +15,5 @@ public interface MedicineMapper {
     int getPurchaseRecordNum();
     int getMedicineNum();
     void updateMedicine(Medicine medicine);
+    void deleteMedicine(int id);
 }

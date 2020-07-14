@@ -6,6 +6,7 @@ import org.csu.hospital.domain.Medicine;
 import org.csu.hospital.domain.PurchaseRecord;
 import org.csu.hospital.service.MedicineService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,6 +43,7 @@ public class MedicineController {
     }
 
     @PutMapping("/medicine/{id}")
+    @ResponseStatus(value = HttpStatus.CREATED)
     public String updateMedicine(@PathVariable("id") int id,
                                  @RequestParam String name,
                                  @RequestParam BigDecimal price,
@@ -58,4 +60,17 @@ public class MedicineController {
         return JSON.toJSONString(medicine);
     }
 
+    @DeleteMapping("/medicine/{id}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public String deleteMedicine(@PathVariable("id") int id) {
+        medicineService.deleteMedicine(id);
+        return "delete  success";
+    }
+
+    @GetMapping("/medicine/{id}")
+    @ResponseStatus(value = HttpStatus.OK)
+    public String getMedicine(@PathVariable("id") int id) {
+        Medicine medicine = medicineService.getMedicine(id);
+        return JSON.toJSONString(medicine);
+    }
 }
