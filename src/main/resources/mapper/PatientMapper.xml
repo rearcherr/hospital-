@@ -61,4 +61,8 @@
     patTel = #{patTel}
     WHERE patId = #{patId}
     </update>
+
+    <delete id="deletePatients" parameterType="int">
+        DELETE FROM PATIENT WHERE patId = #{value}
+    </delete>
 </mapper>

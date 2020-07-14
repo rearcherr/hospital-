@@ -1,15 +1,18 @@
 package org.csu.hospital.controller;
 
 import com.github.pagehelper.PageInfo;
-import org.csu.hospital.domain.Meta;
-import org.csu.hospital.domain.Patient;
+import org.csu.hospital.domain.*;
 import org.csu.hospital.domain.ReturnPatientInfo.ReturnPatientInfo;
 import org.csu.hospital.domain.ReturnPatientInfo.ReturnPatientInfoDate;
 import org.csu.hospital.domain.ReturnPatientInfo.ReturnPatientInfoDateList;
 import org.csu.hospital.domain.ReturnPatientInfoById.ReturnPatientInfoById;
 import org.csu.hospital.domain.ReturnPatientInfoById.ReturnPatientInfoByIdData;
+import org.csu.hospital.domain.ReturnPatientMedRecordById.ReturnPatientMedRecordById;
+import org.csu.hospital.domain.ReturnPatientMedRecordById.ReturnPatientMedRecordByIdData;
+import org.csu.hospital.domain.ReturnPatientMedRecordById.ReturnPatientMedRecordByIdDataList;
 import org.csu.hospital.domain.ReturnPatientUpdate.ReturnPatientUpdate;
 import org.csu.hospital.domain.ReturnPatientUpdate.ReturnPatientUpdateData;
+import org.csu.hospital.service.DoctorService;
 import org.csu.hospital.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +26,9 @@ import java.util.List;
 public class ManagePatientInfoController {
     @Autowired
     private PatientService patientService;
+
+    @Autowired
+    private DoctorService doctorService;
 
 //获取病人信息
     @GetMapping("/patients")
@@ -179,4 +185,63 @@ public class ManagePatientInfoController {
             return returnPatientUpdate;
         }
     }
+    //删除Product(只有当item里没有相应的product才能删)
+    @DeleteMapping("/patients/{id}")
+    @ResponseBody
+    public Meta deletePatients(@PathVariable("id")Integer id){
+        Meta meta = new Meta();
+        try{
+            patientService.deletePatients(id);
+            meta.setStatus(200);
+            meta.setMsg("删除成功");
+            return meta;
+        }
+        catch (Exception e){
+            meta.setStatus(400);
+            meta.setMsg("删除失败");
+            return meta;
+        }
+
+    }
+
+    //根据id查看病人病历表
+    @GetMapping("/patients/medicalRecords/{id}")
+    @ResponseBody
+    public ReturnPatientMedRecordById getPatientMedRecordById(@PathVariable("id")Integer id){
+        ReturnPatientMedRecordById returnPatientMedRecordById = new ReturnPatientMedRecordById();
+        try{
+            Meta meta = new Meta();
+            meta.setMsg("查询成功");
+            meta.setStatus(200);
+
+            ReturnPatientMedRecordByIdData returnPatientMedRecordByIdData = new ReturnPatientMedRecordByIdData();
+            MedicalRecord medicalRecord = patientService.getMedicalRecordsByPatient(id);
+            List<ReturnPatientMedRecordByIdDataList> returnPatientMedRecordByIdDataLists = new ArrayList<ReturnPatientMedRecordByIdDataList>();
+            List<MedicalRecordItem> medicalRecordItem = medicalRecord.getMedicalRecordItems();
+            for(int i=0;i<medicalRecordItem.size();i++){
+                ReturnPatientMedRecordByIdDataList returnPatientMedRecordByIdDataList = new ReturnPatientMedRecordByIdDataList();
+                returnPatientMedRecordByIdDataList.setId(medicalRecordItem.get(i).getItemId());
+                returnPatientMedRecordByIdDataList.setDescription(medicalRecordItem.get(i).getDescription());
+                returnPatientMedRecordByIdDataList.setPatientName(medicalRecord.getPatName());
+                returnPatientMedRecordByIdDataList.setRecid(medicalRecordItem.get(i).getRecId());
+                returnPatientMedRecordByIdDataList.setTime(medicalRecordItem.get(i).getTime());
+                Doctor doctor = doctorService.getDoctorByDocId(medicalRecordItem.get(i).getDocId());
+                returnPatientMedRecordByIdDataList.setDocName(doctor.getDocName());
+                returnPatientMedRecordByIdDataLists.add(returnPatientMedRecordByIdDataList);
+            }
+            returnPatientMedRecordByIdData.setReturnPatientMedRecordByIdDataLists(returnPatientMedRecordByIdDataLists);
+            returnPatientMedRecordById.setMeta(meta);
+            returnPatientMedRecordById.setReturnPatientMedRecordByIdData(returnPatientMedRecordByIdData);
+            return returnPatientMedRecordById;
+        }
+        catch (Exception e){
+            Meta meta = new Meta();
+            meta.setMsg("查询失败");
+            meta.setStatus(400);
+            returnPatientMedRecordById.setMeta(meta);
+            return returnPatientMedRecordById;
+        }
+    }
+
+
 }
