@@ -7,5 +7,6 @@ import java.util.List;
 
 @Repository
 public interface FundMapper {
-    List<Bill> getBillsInSomeDays(int days);
+    int getTotalInSomeDays(int days);
+    int getTotalAtSomeDaysBefore(int days);
 }

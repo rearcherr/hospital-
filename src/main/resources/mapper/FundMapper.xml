@@ -4,9 +4,9 @@
 
 <mapper namespace="org.csu.hospital.persistence.FundMapper">
 
-    <select id="getBillsInSomeDays" resultType="org.csu.hospital.domain.Bill">
+    <select id="getTotalInSomeDays" resultType="int">
         SELECT
-        *
+        sum(totalPrice)
         FROM
         `order`
         WHERE
@@ -16,4 +16,17 @@
         AND
         now();
     </select>
+    <select id="getTotalAtSomeDaysBefore" resultType="int">
+        SELECT
+        IFNULL(sum(totalPrice),0)
+        FROM
+        `order`
+        WHERE
+        time
+        BETWEEN
+        (SELECT DATE_ADD(now(),INTERVAL -#{days}-1 DAY ))
+        AND
+        (SELECT DATE_ADD(now(),INTERVAL -#{days} DAY ))
+    </select>
+
 </mapper>
