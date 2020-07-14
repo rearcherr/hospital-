@@ -14,6 +14,18 @@
         from doctor,department
         WHERE doctor.docDepartment=department.name and doctor.docDepartment=#{value}
     </select>
+    <select id="getDoctorListByDocName" parameterType="String" resultType="Doctor">
+        select
+        *
+        from doctor
+        WHERE docName = #{value}
+    </select>
+    <select id="getDoctorByDocId" parameterType="long" resultType="Doctor">
+        select
+        *
+        from doctor
+        WHERE docId = #{value}
+    </select>
 
 
 
@@ -35,5 +47,11 @@
         VALUES(
             #{docId}, #{patId}, #{time})
     </insert>
+
+    <update id="updateDoctorWage" parameterType="Doctor">
+        UPDATE doctor SET
+            wage = #{wage}
+        WHERE docId = #{docId}
+    </update>
 
 </mapper>

@@ -17,12 +17,26 @@ public class DoctorService {
     @Autowired
     private DoctorMapper doctorMapper;
 
-    public PageInfo<Doctor> findAllUserByPageS(int pageNum, int pageSize) {
+    public PageInfo<Doctor> findAllDoctorSalaryByPageS(int pageNum, int pageSize) {
         // TODO Auto-generated method stub
         PageHelper.startPage(pageNum, pageSize);
         List<Doctor> lists = doctorMapper.getDoctorList();
         PageInfo<Doctor> pageInfo = new PageInfo<Doctor>(lists);
         pageInfo.getSize();
         return pageInfo;
+    }
+    public PageInfo<Doctor> findAllDoctorSalaryByPageSAndDocName(String docName,int pageNum, int pageSize) {
+        // TODO Auto-generated method stub
+        PageHelper.startPage(pageNum, pageSize);
+        List<Doctor> lists = doctorMapper.getDoctorListByDocName(docName);
+        PageInfo<Doctor> pageInfo = new PageInfo<Doctor>(lists);
+        pageInfo.getSize();
+        return pageInfo;
+    }
+    public Doctor getDoctorByDocId(long docID){
+        return doctorMapper.getDoctorByDocId(docID);
+    }
+    public void updateDoctorWage(Doctor doctor){
+        doctorMapper.updateDoctorWage(doctor);
     }
 }
