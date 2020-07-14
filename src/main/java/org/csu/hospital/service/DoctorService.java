@@ -31,10 +31,23 @@ public class DoctorService {
         PageInfo<Doctor> pageInfo = new PageInfo<Doctor>(lists);
         return pageInfo;
     }
+    public PageInfo<Doctor> findAllDoctorSalaryByPageSAndDocId(int docId,int pageNum, int pageSize) {
+        // TODO Auto-generated method stub
+        PageHelper.startPage(pageNum, pageSize);
+        List<Doctor> lists = doctorMapper.getDoctorListByDocId(docId);
+        PageInfo<Doctor> pageInfo = new PageInfo<Doctor>(lists);
+        return pageInfo;
+    }
     public Doctor getDoctorByDocId(long docID){
         return doctorMapper.getDoctorByDocId(docID);
     }
     public void updateDoctorWage(Doctor doctor){
         doctorMapper.updateDoctorWage(doctor);
+    }
+    public void updateDoctorInfo(Doctor doctor){
+        doctorMapper.updateDoctorInfo(doctor);
+    }
+    public void deleteDoctor(int docId){
+        doctorMapper.deleteDoctor(docId);
     }
 }
