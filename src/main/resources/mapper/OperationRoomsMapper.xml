@@ -16,5 +16,18 @@
         from operatingroom
     </select>
 
+    <select id="getOperationRoomsInfoByRoomId" resultType="Operatingroom">
+        select
+        *
+        from operatingroom
+        where roomId = #{value}
+    </select>
+
+    <insert id="insertOperationRoom" parameterType="Operatingroom">
+        INSERT INTO operatingroom
+        (roomId, state)
+        VALUES(
+            #{roomId}, #{state})
+    </insert>
 
 </mapper>

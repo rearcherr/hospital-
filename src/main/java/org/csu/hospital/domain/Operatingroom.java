@@ -5,26 +5,43 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Operatingroom {
 
-  private long roomId;
+  private String roomId;
 
-  private String using;
+  private boolean state;
 
+  private String docname;
 
-  public long getRoomId() {
+  private String patientname;
+
+  public String getRoomId() {
     return roomId;
   }
 
-  public void setRoomId(long roomId) {
+  public void setRoomId(String roomId) {
     this.roomId = roomId;
   }
 
-
-  public String getUsing() {
-    return using;
+  public boolean isState() {
+    return state;
   }
 
-  public void setUsing(String using) {
-    this.using = using;
+  public void setState(boolean state) {
+    this.state = state;
   }
 
+  public String getDocname() {
+    return docname;
+  }
+
+  public void setDocname(String docname) {
+    this.docname = docname;
+  }
+
+  public String getPatientname() {
+    return patientname;
+  }
+
+  public void setPatientname(String patientname) {
+    this.patientname = patientname;
+  }
 }
