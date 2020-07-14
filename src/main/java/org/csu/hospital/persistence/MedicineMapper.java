@@ -10,6 +10,9 @@ import java.util.List;
 public interface MedicineMapper {
     double getPriceByMedicineId(int id);
     Medicine getMedicineById(int id);
+    List<Medicine> getMedicineByPage(int pagenum,int pagesize);
     List<PurchaseRecord> getPurchaseRecordByPage(int pagenum,int pagesize);
     int getPurchaseRecordNum();
+    int getMedicineNum();
+    void updateMedicine(Medicine medicine);
 }

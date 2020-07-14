@@ -22,18 +22,30 @@ public class MedicineService {
     }
 
     public List<PurchaseRecord> getPurchaseRecordByPage(int pagenum, int pagesize) {
-        pagenum  = pagesize * pagenum;
-        List<PurchaseRecord> purchaseRecordList = medicineMapper.getPurchaseRecordByPage(pagenum,pagesize);
-        for (PurchaseRecord purchaseRecord:purchaseRecordList
-             ) {
+        pagenum = pagesize * pagenum;
+        List<PurchaseRecord> purchaseRecordList = medicineMapper.getPurchaseRecordByPage(pagenum, pagesize);
+        for (PurchaseRecord purchaseRecord : purchaseRecordList
+        ) {
             System.out.println(purchaseRecord.getMedId());
             purchaseRecord.setName((medicineMapper.getMedicineById(purchaseRecord.getMedId()).getMedName()));
         }
         return purchaseRecordList;
     }
 
-    public int getPurchaseRecordPageNum() {
-        return (int)((medicineMapper.getPurchaseRecordNum())/10+1);
+    public int getPurchaseRecordPageNum(int pagesize) {
+        return (int) ((medicineMapper.getPurchaseRecordNum()) / pagesize + 1);
     }
 
+    public List<Medicine> getMedicineByPage(int pageNum, int pageSize) {
+        pageNum = pageSize * pageNum;
+        return medicineMapper.getMedicineByPage(pageNum, pageSize);
+    }
+
+    public int getMedicinePageNum(int pagesize) {
+        return medicineMapper.getMedicineNum() / pagesize + 1;
+    }
+
+    public void updateMedicine(Medicine medicine) {
+        medicineMapper.updateMedicine(medicine);
+    }
 }

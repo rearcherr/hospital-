@@ -3,6 +3,17 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.csu.hospital.persistence.MedicineMapper">
+    <update id="updateMedicine" parameterType="org.csu.hospital.domain.Medicine" >
+        UPDATE
+        medicine
+        SET
+        medName = #{medName},
+        medPrice = #{medPrice},
+        medStore = #{medStore},
+        medDesc = #{medDesc}
+        WHERE
+        medId = #{medId}
+    </update>
 
     <select id="getPriceByMedicineId" resultType="java.lang.Double">
         SELECT
@@ -33,4 +44,18 @@
         FROM
         purchaserecords
     </select>
+    <select id="getMedicineByPage" resultType="org.csu.hospital.domain.Medicine">
+        SELECT
+        *
+        FROM
+        medicine
+        LIMIT #{pagesize} OFFSET #{pagenum}
+    </select>
+    <select id="getMedicineNum" resultType="java.lang.Integer">
+        SELECT
+        count(*)
+        FROM
+        medicine
+    </select>
+
 </mapper>
