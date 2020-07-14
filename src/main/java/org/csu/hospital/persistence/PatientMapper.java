@@ -11,7 +11,8 @@ import java.util.List;
 public interface PatientMapper {
     Patient getPatient(String patTel);
     Patient getPatientByPatId(int patId);
-    List<Patient> getOperationRoomsInfo();
+    List<Patient> getPatients();
+    List<Patient> getPatientsByPatId(int patId);
     void UpdatePatient(Patient patient);
     void insertPatient(Patient patient);
 

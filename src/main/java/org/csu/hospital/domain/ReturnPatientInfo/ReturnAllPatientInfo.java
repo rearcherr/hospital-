@@ -1,4 +1,6 @@
-package org.csu.hospital.domain;
+package org.csu.hospital.domain.ReturnPatientInfo;
+
+import org.csu.hospital.domain.Patient;
 
 import java.util.List;
 

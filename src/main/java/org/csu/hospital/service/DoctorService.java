@@ -22,7 +22,6 @@ public class DoctorService {
         PageHelper.startPage(pageNum, pageSize);
         List<Doctor> lists = doctorMapper.getDoctorList();
         PageInfo<Doctor> pageInfo = new PageInfo<Doctor>(lists);
-        pageInfo.getSize();
         return pageInfo;
     }
     public PageInfo<Doctor> findAllDoctorSalaryByPageSAndDocName(String docName,int pageNum, int pageSize) {
@@ -30,7 +29,6 @@ public class DoctorService {
         PageHelper.startPage(pageNum, pageSize);
         List<Doctor> lists = doctorMapper.getDoctorListByDocName(docName);
         PageInfo<Doctor> pageInfo = new PageInfo<Doctor>(lists);
-        pageInfo.getSize();
         return pageInfo;
     }
     public Doctor getDoctorByDocId(long docID){

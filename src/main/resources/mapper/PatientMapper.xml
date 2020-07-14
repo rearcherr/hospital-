@@ -38,7 +38,14 @@
         From Patient
         WHERE  patId = #{value}
     </select>
-    <select id="getOperationRoomsInfo" resultType="Patient">
+    <select id="getPatientsByPatId" parameterType="int" resultType="Patient">
+        SELECT
+        *
+        From Patient
+        WHERE  patId = #{value}
+    </select>
+
+    <select id="getPatients" resultType="Patient">
         SELECT
         *
         From Patient

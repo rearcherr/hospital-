@@ -1,9 +1,11 @@
 package org.csu.hospital.domain.ReturnDoctorSalarys;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ReturnDoctorSalarys {
+    @JsonProperty("data")
     private ReturnDoctorSalarysDate date;
     private ReturnDoctorSalarysMeta meta;
 

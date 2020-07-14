@@ -1,5 +1,8 @@
 package org.csu.hospital.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import org.csu.hospital.domain.Doctor;
 import org.csu.hospital.domain.MedicalRecord;
 import org.csu.hospital.domain.MedicalRecordItem;
 import org.csu.hospital.domain.Patient;
@@ -28,7 +31,7 @@ public class PatientService {
     }
 
     public List<Patient> getPatientInfo() {
-        return patientMapper.getOperationRoomsInfo();
+        return patientMapper.getPatients();
     }
 
     public List<MedicalRecordItem> getItemListByRecord(int id) {
@@ -47,4 +50,21 @@ public class PatientService {
         medicalRecord.setMedicalRecordItems(getItemListByRecord(medicalRecord.getRecId()));
         return medicalRecord;
     }
+
+    public PageInfo<Patient> findAllPatients(int pageNum, int pageSize) {
+        // TODO Auto-generated method stub
+        PageHelper.startPage(pageNum, pageSize);
+        List<Patient> lists = patientMapper.getPatients();
+        PageInfo<Patient> pageInfo = new PageInfo<Patient>(lists);
+        return pageInfo;
+    }
+
+    public PageInfo<Patient> findAllPatientsByPatId(int patId,int pageNum, int pageSize) {
+        // TODO Auto-generated method stub
+        PageHelper.startPage(pageNum, pageSize);
+        List<Patient> lists = patientMapper.getPatientsByPatId(patId);
+        PageInfo<Patient> pageInfo = new PageInfo<Patient>(lists);
+        return pageInfo;
+    }
+
 }

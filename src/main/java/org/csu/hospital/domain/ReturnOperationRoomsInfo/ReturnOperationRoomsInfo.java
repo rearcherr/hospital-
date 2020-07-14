@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.csu.hospital.domain.Operatingroom;
 
 import java.util.List;
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ReturnOperationRoomsInfo {
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+
     private ReturnOperationRoomsInfoData data;
     private ReturnOperationRoomsInfoMeta meta;
 

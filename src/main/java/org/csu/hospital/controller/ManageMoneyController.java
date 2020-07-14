@@ -122,7 +122,8 @@ public class ManageMoneyController {
             ReturnUpdateDoctorSalarys returnUpdateDoctorSalarys = new ReturnUpdateDoctorSalarys();
             Meta meta = new Meta();
             meta.setMsg("更新失败");
-            meta.setStatus(400);
+            meta.setStatus(500);
+            returnUpdateDoctorSalarys.setMeta(meta);
             return returnUpdateDoctorSalarys;
         }
     }
