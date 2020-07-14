@@ -16,4 +16,5 @@ public interface MedicineMapper {
     int getMedicineNum();
     void updateMedicine(Medicine medicine);
     void deleteMedicine(int id);
+    void insertMedicine(Medicine medicine);
 }

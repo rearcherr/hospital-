@@ -73,4 +73,21 @@ public class MedicineController {
         Medicine medicine = medicineService.getMedicine(id);
         return JSON.toJSONString(medicine);
     }
+
+    @PostMapping("/medicine/{id}")
+    @ResponseStatus(value = HttpStatus.CREATED)
+    public String insertMedicine(@PathVariable("id") int id,
+                              @RequestParam String name,
+                              @RequestParam BigDecimal price,
+                              @RequestParam int quantity,
+                              @RequestParam String description) {
+        Medicine medicine = new Medicine();
+        medicine.setMedId(id);
+        medicine.setMedName(name);
+        medicine.setMedPrice(price);
+        medicine.setMedStore(quantity);
+        medicine.setMedDesc(description);
+        medicineService.insertMedicine(medicine);
+        return JSON.toJSONString(medicine);
+    }
 }
