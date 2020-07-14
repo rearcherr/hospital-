@@ -19,4 +19,20 @@
         WHERE
         wardId = #{id}
     </delete>
+
+    <select id="getWards" resultType="Ward">
+        SELECT
+            wardId AS id,
+            patId AS patId,
+            master AS master
+        From ward
+    </select>
+    <select id="getWardsByWardId" parameterType="int" resultType="Ward">
+        SELECT
+            wardId AS id,
+            patId AS patId,
+            master AS master
+        From ward
+        WHERE  wardId = #{value}
+    </select>
 </mapper>
