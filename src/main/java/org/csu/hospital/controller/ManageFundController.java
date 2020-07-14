@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/manage")
+@RequestMapping("/api")
 public class ManageFundController {
 
     @Autowired
     FundService fundService;
 
-    @GetMapping("/incomes")
+    @GetMapping("/expense")
     @ResponseStatus(value = HttpStatus.OK)
     public String getIncomes(){
         JSONObject jsonObject = new JSONObject();
@@ -30,7 +30,7 @@ public class ManageFundController {
         jsonArray.add(2,fundService.getTotalAtSomeDaysBefore(2));
         jsonArray.add(3,fundService.getTotalAtSomeDaysBefore(3));
         jsonArray.add(4,fundService.getTotalAtSomeDaysBefore(4));
-        jsonObject.put("list",jsonArray);
+        jsonObject.put("expense",jsonArray);
         return JSON.toJSONString(jsonObject);
     }
 

@@ -29,7 +29,6 @@ public class ManageOperationRoomsController {
             return returnCode;
         }
     }
-
     //获取所有手术室信息
     @GetMapping("/operationRooms")
     @ResponseBody
