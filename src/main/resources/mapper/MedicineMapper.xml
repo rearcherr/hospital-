@@ -3,6 +3,23 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.csu.hospital.persistence.MedicineMapper">
+    <insert id="insertMedicine" parameterType="org.csu.hospital.domain.Medicine">
+        INSERT INTO
+        medicine
+        (
+        medName,
+        medPrice,
+        medStore,
+        medDesc
+        )
+        VALUES
+        (
+        #{medName},
+        #{medPrice},
+        #{medStore},
+        #{medDesc}
+        )
+    </insert>
     <update id="updateMedicine" parameterType="org.csu.hospital.domain.Medicine" >
         UPDATE
         medicine

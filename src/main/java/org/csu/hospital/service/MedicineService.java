@@ -49,11 +49,16 @@ public class MedicineService {
         medicineMapper.updateMedicine(medicine);
     }
 
-    public void deleteMedicine(int id){
+    public void deleteMedicine(int id) {
         medicineMapper.deleteMedicine(id);
     }
-    public Medicine getMedicine(int id){
-        return  medicineMapper.getMedicineById(id);
+
+    public Medicine getMedicine(int id) {
+        return medicineMapper.getMedicineById(id);
+    }
+
+    public void insertMedicine(Medicine medicine){
+        medicineMapper.insertMedicine(medicine);
     }
 
 }
