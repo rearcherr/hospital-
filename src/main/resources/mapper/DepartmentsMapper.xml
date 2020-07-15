@@ -8,4 +8,10 @@
         *
         from department
     </select>
+    <select id="getDepartmentsById" parameterType="int" resultType="Department">
+        select
+        *
+        from department
+        where id = #{value}
+    </select>
 </mapper>

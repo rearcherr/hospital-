@@ -6,7 +6,15 @@ public class Department {
   private long id;
   private String name;
   private String introduction;
+  private String master;
 
+  public String getMaster() {
+    return master;
+  }
+
+  public void setMaster(String master) {
+    this.master = master;
+  }
 
   public long getId() {
     return id;
