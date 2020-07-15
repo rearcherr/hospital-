@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package org.csu.hospital.controller;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

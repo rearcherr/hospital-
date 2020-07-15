@@ -1,8 +1,11 @@
 package org.csu.hospital.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.github.pagehelper.PageInfo;
+
 import org.csu.hospital.domain.Department;
-import org.csu.hospital.domain.Doctor;
 import org.csu.hospital.domain.Meta;
 import org.csu.hospital.domain.ReturnDeparts.ReturnDeparts;
 import org.csu.hospital.domain.ReturnDeparts.ReturnDepartsDate;
@@ -12,10 +15,12 @@ import org.csu.hospital.domain.ReturnUpdateDepartment.ReturnUpdateDepartmentDate
 import org.csu.hospital.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/manage")
@@ -23,27 +28,26 @@ public class DepartmentController {
     @Autowired
     DepartmentService departmentService;
 
-//查看科室列表
+    // 查看科室列表
     @GetMapping("/department")
     @ResponseBody
-    public ReturnDeparts getDepartsList(@RequestParam(value = "query", required = false)Integer query,
-                                        @RequestParam("pagenum")int pageNum, @RequestParam("pagesize")int pageSize){
+    public ReturnDeparts getDepartsList(@RequestParam(value = "query", required = false) Integer query,
+            @RequestParam("pagenum") int pageNum, @RequestParam("pagesize") int pageSize) {
         ReturnDeparts returnDeparts = new ReturnDeparts();
-        try{
+        try {
             PageInfo<Department> departmentPageInfo = new PageInfo<Department>();
-            if(query==null){
-                departmentPageInfo=departmentService.findAllDepartmentsByPageS(pageNum,pageSize);
-            }
-            else {
-                departmentPageInfo=departmentService.findAllDepartmentsByPageSAndId(query,pageNum,pageSize);
+            if (query == null) {
+                departmentPageInfo = departmentService.findAllDepartmentsByPageS(pageNum, pageSize);
+            } else {
+                departmentPageInfo = departmentService.findAllDepartmentsByPageSAndId(query, pageNum, pageSize);
             }
             List<Department> departments = departmentPageInfo.getList();
             ReturnDepartsDate returnDepartsDate = new ReturnDepartsDate();
             List<ReturnDepartsDateList> returnDepartsDates = new ArrayList<ReturnDepartsDateList>();
-            for(int i=0;i<departments.size();i++){
+            for (int i = 0; i < departments.size(); i++) {
                 Department department = departments.get(i);
                 ReturnDepartsDateList returnDepartsDateList = new ReturnDepartsDateList();
-                returnDepartsDateList.setId((int)department.getId());
+                returnDepartsDateList.setId((int) department.getId());
                 returnDepartsDateList.setIntroduction(department.getIntroduction());
                 returnDepartsDateList.setMaster(department.getMaster());
                 returnDepartsDateList.setName(department.getName());
@@ -61,8 +65,7 @@ public class DepartmentController {
             returnDeparts.setDate(returnDepartsDate);
             returnDeparts.setMeta(meta);
             return returnDeparts;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             Meta meta = new Meta();
             meta.setStatus(400);
             meta.setMsg("获取失败");
@@ -71,23 +74,23 @@ public class DepartmentController {
         }
     }
 
-    //修改科室信息
+    // 修改科室信息
     @PutMapping("/department/{id}")
     @ResponseBody
-    public ReturnUpdateDepartment UpdateDepartment(@PathVariable("id")Integer id,
-                                                   @RequestParam(value = "name",required = false)String name,
-                                                   @RequestParam(value = "master",required = false)String master,
-                                                   @RequestParam(value = "introduction",required = false)String introduction){
+    public ReturnUpdateDepartment UpdateDepartment(@PathVariable("id") Integer id,
+            @RequestParam(value = "name", required = false) String name,
+            @RequestParam(value = "master", required = false) String master,
+            @RequestParam(value = "introduction", required = false) String introduction) {
         ReturnUpdateDepartment returnUpdateDepartment = new ReturnUpdateDepartment();
-        try{
+        try {
             Department department = departmentService.getDepartmentById(id);
-            if(name!=null){
+            if (name != null) {
                 department.setName(name);
             }
-            if(master!=null){
+            if (master != null) {
                 department.setMaster(master);
             }
-            if(introduction!=null){
+            if (introduction != null) {
                 department.setIntroduction(introduction);
             }
             departmentService.updateDepartment(department);
@@ -102,8 +105,7 @@ public class DepartmentController {
             returnUpdateDepartment.setDate(returnUpdateDepartmentDate);
             returnUpdateDepartment.setMeta(meta);
             return returnUpdateDepartment;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             Meta meta = new Meta();
             meta.setMsg("更新失败");
             meta.setStatus(400);
