@@ -51,7 +51,7 @@ public class ManagePatientInfoController {
                     returnPatientInfoDateList.setId(patient.getPatId());
                     returnPatientInfoDateList.setName(patient.getPatName());
                     returnPatientInfoDateList.setPatGender(patient.getPatGender());
-                    returnPatientInfoDateList.setPhone(patient.getPatName());
+                    returnPatientInfoDateList.setPhone(patient.getPatTel());
                     returnPatientInfoDateLists.add(returnPatientInfoDateList);
                 }
                 returnPatientInfoDate.setReturnPatientInfoDateLists(returnPatientInfoDateLists);
@@ -77,7 +77,7 @@ public class ManagePatientInfoController {
                     returnPatientInfoDateList.setId(patient.getPatId());
                     returnPatientInfoDateList.setName(patient.getPatName());
                     returnPatientInfoDateList.setPatGender(patient.getPatGender());
-                    returnPatientInfoDateList.setPhone(patient.getPatName());
+                    returnPatientInfoDateList.setPhone(patient.getPatTel());
                     returnPatientInfoDateLists.add(returnPatientInfoDateList);
                 }
                 returnPatientInfoDate.setReturnPatientInfoDateLists(returnPatientInfoDateLists);
