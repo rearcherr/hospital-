@@ -29,4 +29,11 @@ public class DepartmentService {
         PageInfo<Department> pageInfo = new PageInfo<Department>(lists);
         return pageInfo;
     }
+
+    public Department getDepartmentById(int id){
+        return departmentsMapper.getDepartmentById(id);
+    }
+    public void updateDepartment(Department department){
+        departmentsMapper.updateDepartment(department);
+    }
 }

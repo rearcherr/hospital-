@@ -7,13 +7,12 @@ import org.csu.hospital.domain.Meta;
 import org.csu.hospital.domain.ReturnDeparts.ReturnDeparts;
 import org.csu.hospital.domain.ReturnDeparts.ReturnDepartsDate;
 import org.csu.hospital.domain.ReturnDeparts.ReturnDepartsDateList;
+import org.csu.hospital.domain.ReturnUpdateDepartment.ReturnUpdateDepartment;
+import org.csu.hospital.domain.ReturnUpdateDepartment.ReturnUpdateDepartmentDate;
 import org.csu.hospital.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +68,47 @@ public class DepartmentController {
             meta.setMsg("获取失败");
             returnDeparts.setMeta(meta);
             return returnDeparts;
+        }
+    }
+
+    //修改科室信息
+    @PutMapping("/department/{id}")
+    @ResponseBody
+    public ReturnUpdateDepartment UpdateDepartment(@PathVariable("id")Integer id,
+                                                   @RequestParam(value = "name",required = false)String name,
+                                                   @RequestParam(value = "master",required = false)String master,
+                                                   @RequestParam(value = "introduction",required = false)String introduction){
+        ReturnUpdateDepartment returnUpdateDepartment = new ReturnUpdateDepartment();
+        try{
+            Department department = departmentService.getDepartmentById(id);
+            if(name!=null){
+                department.setName(name);
+            }
+            if(master!=null){
+                department.setMaster(master);
+            }
+            if(introduction!=null){
+                department.setIntroduction(introduction);
+            }
+            departmentService.updateDepartment(department);
+            Department department1 = departmentService.getDepartmentById(id);
+            ReturnUpdateDepartmentDate returnUpdateDepartmentDate = new ReturnUpdateDepartmentDate();
+            returnUpdateDepartmentDate.setId((int) department1.getId());
+            returnUpdateDepartmentDate.setIntroduction(department1.getIntroduction());
+            returnUpdateDepartmentDate.setMaster(department1.getMaster());
+            returnUpdateDepartmentDate.setName(department1.getName());
+            Meta meta = new Meta();
+            meta.setMsg("更新成功");
+            returnUpdateDepartment.setDate(returnUpdateDepartmentDate);
+            returnUpdateDepartment.setMeta(meta);
+            return returnUpdateDepartment;
+        }
+        catch (Exception e){
+            Meta meta = new Meta();
+            meta.setMsg("更新失败");
+            meta.setStatus(400);
+            returnUpdateDepartment.setMeta(meta);
+            return returnUpdateDepartment;
         }
     }
 

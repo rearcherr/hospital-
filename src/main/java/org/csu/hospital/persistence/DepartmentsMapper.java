@@ -9,4 +9,6 @@ import java.util.List;
 public interface DepartmentsMapper {
     List<Department> getDepartments();
     List<Department> getDepartmentsById(int query);
+    Department getDepartmentById(int id);
+    void updateDepartment(Department department);
 }
