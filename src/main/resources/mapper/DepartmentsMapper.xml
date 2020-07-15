@@ -8,4 +8,24 @@
         *
         from department
     </select>
+    <select id="getDepartmentsById" parameterType="int" resultType="Department">
+        select
+        *
+        from department
+        where id = #{value}
+    </select>
+    <select id="getDepartmentById" parameterType="int" resultType="Department">
+        select
+        *
+        from department
+        where id = #{value}
+    </select>
+
+    <update id="updateDepartment" parameterType="Department">
+        UPDATE department SET
+            name = #{name},
+            Introduction = #{introduction},
+            master = #{master}
+        WHERE id = #{id}
+    </update>
 </mapper>

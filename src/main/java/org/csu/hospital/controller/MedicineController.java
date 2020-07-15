@@ -1,16 +1,25 @@
 package org.csu.hospital.controller;
 
+import java.math.BigDecimal;
+import java.util.List;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+
 import org.csu.hospital.domain.Medicine;
 import org.csu.hospital.domain.PurchaseRecord;
 import org.csu.hospital.service.MedicineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
-
-import java.math.BigDecimal;
-import java.util.List;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
@@ -23,8 +32,8 @@ public class MedicineController {
     public String getMedicalEnpense(int pagenum, int pagesize) {
         List<PurchaseRecord> purchaseRecordList = medicineService.getPurchaseRecordByPage(pagenum, pagesize);
         JSONObject jsonObject = new JSONObject();
-        int totalPage = medicineService.getPurchaseRecordNum(pagesize);
-        jsonObject.put("total", totalPage);
+        int totalPage = medicineService.getPurchaseRecordPageNum(pagesize);
+        jsonObject.put("totalpage", totalPage);
         jsonObject.put("pagenum", pagenum);
         jsonObject.put("medicalExpenses", purchaseRecordList);
         return JSON.toJSONString(jsonObject);
@@ -34,8 +43,8 @@ public class MedicineController {
     public String getMedicineList(int pagenum, int pagesize) {
         List<Medicine> medicineList = medicineService.getMedicineByPage(pagenum, pagesize);
         JSONObject jsonObject = new JSONObject();
-        int totalPage = medicineService.getMedicineNum(pagesize);
-        jsonObject.put("total", totalPage);
+        int totalPage = medicineService.getMedicinePageNum(pagesize);
+        jsonObject.put("totalpage", totalPage);
         jsonObject.put("pagenum", pagenum);
         jsonObject.put("medicine", medicineList);
         return JSON.toJSONString(jsonObject);
@@ -43,12 +52,8 @@ public class MedicineController {
 
     @PutMapping("/medicine/{id}")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public String updateMedicine(@PathVariable("id") int id,
-                                 @RequestParam String name,
-                                 @RequestParam BigDecimal price,
-                                 @RequestParam int quantity,
-                                 @RequestParam String description
-    ) {
+    public String updateMedicine(@PathVariable("id") int id, @RequestParam String name, @RequestParam BigDecimal price,
+            @RequestParam int quantity, @RequestParam String description) {
         Medicine medicine = new Medicine();
         medicine.setMedId(id);
         medicine.setMedName(name);
@@ -75,11 +80,8 @@ public class MedicineController {
 
     @PostMapping("/medicine/{id}")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public String insertMedicine(@PathVariable("id") int id,
-                              @RequestParam String name,
-                              @RequestParam BigDecimal price,
-                              @RequestParam int quantity,
-                              @RequestParam String description) {
+    public String insertMedicine(@PathVariable("id") int id, @RequestParam String name, @RequestParam BigDecimal price,
+            @RequestParam int quantity, @RequestParam String description) {
         Medicine medicine = new Medicine();
         medicine.setMedId(id);
         medicine.setMedName(name);

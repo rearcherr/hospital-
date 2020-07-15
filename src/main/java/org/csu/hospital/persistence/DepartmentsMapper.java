@@ -8,4 +8,7 @@ import java.util.List;
 @Repository
 public interface DepartmentsMapper {
     List<Department> getDepartments();
+    List<Department> getDepartmentsById(int query);
+    Department getDepartmentById(int id);
+    void updateDepartment(Department department);
 }

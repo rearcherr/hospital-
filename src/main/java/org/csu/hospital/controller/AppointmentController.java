@@ -136,13 +136,13 @@ public class AppointmentController {
                     lists.add(doctors1);
                     System.out.println(date);
                     List<ReturnDocInfomation> returnDocInfomations = new ArrayList<ReturnDocInfomation>();
-                    for(int k = 0;k<doctors1.size();k++){
+                    for (Doctor doctor : doctors1) {
                         ReturnDocInfomation returnDocInfomation = new ReturnDocInfomation();
-                        returnDocInfomation.setDoctor_id(doctors1.get(k).getDocId());
-                        returnDocInfomation.setDoctor_name(doctors1.get(k).getDocName());
-                        returnDocInfomation.setDoctor_degree(doctors1.get(k).getDocRank());
-                        returnDocInfomation.setDoctor_desc(doctors1.get(k).getDocDesc());
-                        returnDocInfomation.setDoctor_image(doctors1.get(k).getDocImage());
+                        returnDocInfomation.setDoctor_id(doctor.getDocId());
+                        returnDocInfomation.setDoctor_name(doctor.getDocName());
+                        returnDocInfomation.setDoctor_degree(doctor.getDocRank());
+                        returnDocInfomation.setDoctor_desc(doctor.getDocDesc());
+                        returnDocInfomation.setDoctor_image(doctor.getDocImage());
                         returnDocInfomations.add(returnDocInfomation);
                     }
                     returnSelectByDateList.setDoctors(returnDocInfomations);
