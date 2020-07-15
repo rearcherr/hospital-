@@ -55,7 +55,7 @@ public class ManagePatientInfoController {
                     returnPatientInfoDateLists.add(returnPatientInfoDateList);
                 }
                 returnPatientInfoDate.setReturnPatientInfoDateLists(returnPatientInfoDateLists);
-                returnPatientInfoDate.setTotalpage(patientPageInfo.getPages());
+                returnPatientInfoDate.setTotalpage((int) patientPageInfo.getTotal());
                 returnPatientInfoDate.setPagenum(patientPageInfo.getPageNum());
                 returnPatientInfo.setMeta(meta);
                 returnPatientInfo.setReturnPatientInfoDate(returnPatientInfoDate);
@@ -81,7 +81,7 @@ public class ManagePatientInfoController {
                     returnPatientInfoDateLists.add(returnPatientInfoDateList);
                 }
                 returnPatientInfoDate.setReturnPatientInfoDateLists(returnPatientInfoDateLists);
-                returnPatientInfoDate.setTotalpage(patientPageInfo.getPages());
+                returnPatientInfoDate.setTotalpage((int) patientPageInfo.getTotal());
                 returnPatientInfoDate.setPagenum(patientPageInfo.getPageNum());
                 returnPatientInfo.setMeta(meta);
                 returnPatientInfo.setReturnPatientInfoDate(returnPatientInfoDate);

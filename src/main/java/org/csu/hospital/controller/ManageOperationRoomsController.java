@@ -84,7 +84,7 @@ public class ManageOperationRoomsController {
 
                 ReturnOperationRoomsInfoData returnOperationRoomsInfoData = new ReturnOperationRoomsInfoData();
                 PageInfo<Operatingroom> operatingroomPageInfo = operationRoomsService.findAllOperatingroomByPageS(pagenum,pagesize);
-                returnOperationRoomsInfoData.setTotalpage(operatingroomPageInfo.getPages());
+                returnOperationRoomsInfoData.setTotalpage((int) operatingroomPageInfo.getTotal());
                 returnOperationRoomsInfoData.setPagenum(operatingroomPageInfo.getPageNum());
                 returnOperationRoomsInfoData.setOperationRooms(operatingroomPageInfo.getList());
 
@@ -99,7 +99,7 @@ public class ManageOperationRoomsController {
 
                 ReturnOperationRoomsInfoData returnOperationRoomsInfoData = new ReturnOperationRoomsInfoData();
                 PageInfo<Operatingroom> operatingroomPageInfo = operationRoomsService.findAllOperatingroomByPageSAndRoomId(pagenum,pagesize,query);
-                returnOperationRoomsInfoData.setTotalpage(operatingroomPageInfo.getPages());
+                returnOperationRoomsInfoData.setTotalpage((int) operatingroomPageInfo.getTotal());
                 returnOperationRoomsInfoData.setPagenum(operatingroomPageInfo.getPageNum());
                 returnOperationRoomsInfoData.setOperationRooms(operatingroomPageInfo.getList());
 

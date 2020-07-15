@@ -7,6 +7,7 @@ import java.util.List;
 public class ReturnDepartsDate {
     @JsonProperty("departments")
     private List<ReturnDepartsDateList> returnDepartsDateLists;
+    @JsonProperty("total")
     private int totalpage;
     private int pagenum;
 

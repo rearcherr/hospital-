@@ -7,6 +7,7 @@ import java.util.List;
 public class ReturnDoctorSalarysDate {
     @JsonProperty("doctors")
     private List<ReturnDoctorSalarysDateList> returnDoctorSalarysDateLists;
+    @JsonProperty("total")
     private int totalpage;
     private int pagenum;
 

@@ -1,9 +1,12 @@
 package org.csu.hospital.domain.ReturnWordList;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 public class ReturnWordListData {
     private List<ReturnWordListDataList> patients;
+    @JsonProperty("total")
     private int totalpage;
     private int pagenum;
 

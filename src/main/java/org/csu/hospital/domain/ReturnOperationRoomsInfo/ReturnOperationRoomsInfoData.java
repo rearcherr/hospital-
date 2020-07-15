@@ -1,11 +1,13 @@
 package org.csu.hospital.domain.ReturnOperationRoomsInfo;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.csu.hospital.domain.Operatingroom;
 
 import java.util.List;
 
 public class ReturnOperationRoomsInfoData {
     private List<Operatingroom> operationRooms;
+    @JsonProperty("total")
     private int totalpage;
     private int pagenum;
 

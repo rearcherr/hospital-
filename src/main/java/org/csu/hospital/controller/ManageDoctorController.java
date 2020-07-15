@@ -57,7 +57,7 @@ public class ManageDoctorController {
             }
             ReturnDoctorInfoData returnDoctorInfoData = new ReturnDoctorInfoData();
             returnDoctorInfoData.setReturnDoctorInfoDataLists(returnDoctorInfoDataLists);
-            returnDoctorInfoData.setTotalpage(doctorPageInfo.getPages());
+            returnDoctorInfoData.setTotalpage((int) doctorPageInfo.getTotal());
             returnDoctorInfoData.setPagenum(doctorPageInfo.getPageNum());
             Meta meta = new Meta();
             meta.setMsg("获取成功");

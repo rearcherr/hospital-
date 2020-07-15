@@ -51,7 +51,7 @@ public class ManageMoneyController {
                     returnDoctorSalarysDateLists.add(returnDoctorSalarysDateList);
                 }
                 returnDoctorSalarysDate.setReturnDoctorSalarysDateLists(returnDoctorSalarysDateLists);
-                returnDoctorSalarysDate.setTotalpage(doctorPageInfo.getPages());
+                returnDoctorSalarysDate.setTotalpage((int) doctorPageInfo.getTotal());
                 returnDoctorSalarysDate.setPagenum(doctorPageInfo.getPageNum());
                 returnDoctorSalarys.setDate(returnDoctorSalarysDate);
                 returnDoctorSalarys.setMeta(returnDoctorSalarysMeta);
@@ -77,7 +77,7 @@ public class ManageMoneyController {
                     returnDoctorSalarysDateLists.add(returnDoctorSalarysDateList);
                 }
                 returnDoctorSalarysDate.setReturnDoctorSalarysDateLists(returnDoctorSalarysDateLists);
-                returnDoctorSalarysDate.setTotalpage(doctorPageInfo.getPages());
+                returnDoctorSalarysDate.setTotalpage((int)doctorPageInfo.getTotal());
                 returnDoctorSalarysDate.setPagenum(doctorPageInfo.getPageNum());
                 returnDoctorSalarys.setDate(returnDoctorSalarysDate);
                 returnDoctorSalarys.setMeta(returnDoctorSalarysMeta);
