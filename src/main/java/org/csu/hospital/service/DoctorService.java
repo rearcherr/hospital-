@@ -37,4 +37,7 @@ public class DoctorService {
     public void updateDoctorWage(Doctor doctor){
         doctorMapper.updateDoctorWage(doctor);
     }
+    public double getTotalWage(){
+        return  doctorMapper.getTotalWage();
+    }
 }

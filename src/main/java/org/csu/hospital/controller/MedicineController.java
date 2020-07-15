@@ -7,7 +7,6 @@ import org.csu.hospital.domain.PurchaseRecord;
 import org.csu.hospital.service.MedicineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -24,8 +23,8 @@ public class MedicineController {
     public String getMedicalEnpense(int pagenum, int pagesize) {
         List<PurchaseRecord> purchaseRecordList = medicineService.getPurchaseRecordByPage(pagenum, pagesize);
         JSONObject jsonObject = new JSONObject();
-        int totalPage = medicineService.getPurchaseRecordPageNum(pagesize);
-        jsonObject.put("totalpage", totalPage);
+        int totalPage = medicineService.getPurchaseRecordNum(pagesize);
+        jsonObject.put("total", totalPage);
         jsonObject.put("pagenum", pagenum);
         jsonObject.put("medicalExpenses", purchaseRecordList);
         return JSON.toJSONString(jsonObject);
@@ -35,8 +34,8 @@ public class MedicineController {
     public String getMedicineList(int pagenum, int pagesize) {
         List<Medicine> medicineList = medicineService.getMedicineByPage(pagenum, pagesize);
         JSONObject jsonObject = new JSONObject();
-        int totalPage = medicineService.getMedicinePageNum(pagesize);
-        jsonObject.put("totalpage", totalPage);
+        int totalPage = medicineService.getMedicineNum(pagesize);
+        jsonObject.put("total", totalPage);
         jsonObject.put("pagenum", pagenum);
         jsonObject.put("medicine", medicineList);
         return JSON.toJSONString(jsonObject);

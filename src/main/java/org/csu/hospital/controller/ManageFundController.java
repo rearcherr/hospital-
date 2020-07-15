@@ -3,6 +3,7 @@ package org.csu.hospital.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import org.csu.hospital.service.DoctorService;
 import org.csu.hospital.service.FundService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,7 +20,10 @@ public class ManageFundController {
     @Autowired
     FundService fundService;
 
-    @GetMapping("/expense")
+    @Autowired
+    DoctorService doctorService;
+
+    @GetMapping("/incomes")
     @ResponseStatus(value = HttpStatus.OK)
     public String getIncomes(){
         JSONObject jsonObject = new JSONObject();
@@ -31,6 +35,21 @@ public class ManageFundController {
         jsonArray.add(3,fundService.getTotalAtSomeDaysBefore(3));
         jsonArray.add(4,fundService.getTotalAtSomeDaysBefore(4));
         jsonObject.put("expense",jsonArray);
+        return JSON.toJSONString(jsonObject);
+    }
+
+    @GetMapping("/expense")
+    @ResponseStatus(value = HttpStatus.OK)
+    public String getExpense(){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("totalExpense",fundService.getTotalInSomeDays(30)+doctorService.getTotalWage());
+        JSONArray jsonArray = new JSONArray(5);
+        jsonArray.add(0,fundService.getTotalOutcomeSomeDaysBefore(0));
+        jsonArray.add(1,fundService.getTotalOutcomeSomeDaysBefore(1));
+        jsonArray.add(2,fundService.getTotalOutcomeSomeDaysBefore(2));
+        jsonArray.add(3,fundService.getTotalOutcomeSomeDaysBefore(3));
+        jsonArray.add(4,fundService.getTotalOutcomeSomeDaysBefore(4));
+        jsonObject.put("expenses",jsonArray);
         return JSON.toJSONString(jsonObject);
     }
 

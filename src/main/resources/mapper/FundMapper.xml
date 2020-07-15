@@ -6,7 +6,7 @@
 
     <select id="getTotalInSomeDays" resultType="int">
         SELECT
-        sum(totalPrice)
+        IFNULL(sum(totalPrice),0)
         FROM
         `order`
         WHERE
@@ -27,6 +27,30 @@
         (SELECT DATE_ADD(now(),INTERVAL -#{days}-1 DAY ))
         AND
         (SELECT DATE_ADD(now(),INTERVAL -#{days} DAY ))
+    </select>
+    <select id="getTotalOutcomeAtSomeDaysBefore" resultType="java.lang.Double">
+        SELECT
+        IFNULL(SUM(amount*price),0)
+        FROM
+        purchaserecords
+        WHERE
+        date
+        BETWEEN
+        (SELECT DATE_ADD(now(),INTERVAL -#{days}-1 DAY ))
+        AND
+        (SELECT DATE_ADD(now(),INTERVAL -#{days} DAY ))
+    </select>
+    <select id="getTotalOutcomeInSomeDays" resultType="java.lang.Double">
+        SELECT
+        IFNULL(sum(amount*price),0)
+        FROM
+        purchaserecords
+        WHERE
+        date
+        BETWEEN
+        (SELECT DATE_ADD(now(),INTERVAL -#{days} DAY ))
+        AND
+        now();
     </select>
 
 </mapper>

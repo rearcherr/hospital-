@@ -32,8 +32,8 @@ public class MedicineService {
         return purchaseRecordList;
     }
 
-    public int getPurchaseRecordPageNum(int pagesize) {
-        return (int) ((medicineMapper.getPurchaseRecordNum()) / pagesize + 1);
+    public int getPurchaseRecordNum(int pagesize) {
+        return (int) ((medicineMapper.getPurchaseRecordNum()));
     }
 
     public List<Medicine> getMedicineByPage(int pageNum, int pageSize) {
@@ -41,8 +41,8 @@ public class MedicineService {
         return medicineMapper.getMedicineByPage(pageNum, pageSize);
     }
 
-    public int getMedicinePageNum(int pagesize) {
-        return medicineMapper.getMedicineNum() / pagesize + 1;
+    public int getMedicineNum(int pagesize) {
+        return medicineMapper.getMedicineNum();
     }
 
     public void updateMedicine(Medicine medicine) {

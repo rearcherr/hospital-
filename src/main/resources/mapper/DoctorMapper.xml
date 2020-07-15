@@ -40,6 +40,12 @@
         from registeredrecord
         where docId = #{value}
     </select>
+    <select id="getTotalWage" resultType="java.lang.Double">
+        SELECT
+        SUM(wage)
+        FROM
+        doctor
+    </select>
 
     <insert id="doAppointment" parameterType="Registeredrecord">
         INSERT INTO registeredrecord

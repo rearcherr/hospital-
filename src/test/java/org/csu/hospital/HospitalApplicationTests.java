@@ -43,6 +43,9 @@ class HospitalApplicationTests {
     @Autowired
     MedicineService medicineService;
 
+    @Autowired
+    DoctorMapper doctorMapper;
+
     @Test
     void contextLoads() {
     }
@@ -148,7 +151,9 @@ class HospitalApplicationTests {
 //        System.out.println(billList);
 //        List<BillItem> medicalRecordItems = billMapper.getBillItemsByBill(1);
 //        System.out.println(medicalRecordItems.get(0).getName());
-        System.out.println(medicineService.getPurchaseRecordByPage(0,2));
+        System.out.println(doctorMapper.getTotalWage());
+
+//        System.out.println(medicineService.getPurchaseRecordByPage(0,2));
     }
 
 

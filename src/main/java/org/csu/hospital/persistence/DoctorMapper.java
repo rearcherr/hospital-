@@ -18,5 +18,5 @@ public interface DoctorMapper {
     void doAppointment (Registeredrecord registeredrecord);
     Doctor getDoctorByDocId(long docID);
     void updateDoctorWage(Doctor doctor);
-
+    double getTotalWage();
 }
