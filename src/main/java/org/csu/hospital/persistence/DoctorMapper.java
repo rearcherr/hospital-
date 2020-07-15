@@ -21,4 +21,5 @@ public interface DoctorMapper {
     void updateDoctorWage(Doctor doctor);
     void updateDoctorInfo(Doctor doctor);
     void deleteDoctor(int docId);
+    double getTotalWage();
 }
