@@ -55,7 +55,7 @@ public class DepartmentController {
             }
 
             returnDepartsDate.setPagenum(departmentPageInfo.getPageNum());
-            returnDepartsDate.setTotalpage(departmentPageInfo.getPages());
+            returnDepartsDate.setTotalpage((int) departmentPageInfo.getTotal());
             returnDepartsDate.setReturnDepartsDateLists(returnDepartsDates);
 
             Meta meta = new Meta();

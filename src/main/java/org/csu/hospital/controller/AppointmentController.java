@@ -143,7 +143,6 @@ public class AppointmentController {
                     List<Doctor> doctors = appointmentService.getDoctorListByDepartment(department);
                     List<Doctor> doctors1 = appointmentService.getDoctorListByDepartmentAndDate(doctors, date);
                     lists.add(doctors1);
-                    System.out.println(date);
                     List<ReturnDocInfomation> returnDocInfomations = new ArrayList<ReturnDocInfomation>();
                     for (Doctor doctor : doctors1) {
                         ReturnDocInfomation returnDocInfomation = new ReturnDocInfomation();

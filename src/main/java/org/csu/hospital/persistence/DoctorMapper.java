@@ -30,4 +30,5 @@ public interface DoctorMapper {
     void updateDoctorInfo(Doctor doctor);
 
     void deleteDoctor(int docId);
+    double getTotalWage();
 }

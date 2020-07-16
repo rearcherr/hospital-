@@ -82,7 +82,7 @@ public class WardController {
             meta.setMsg("获取成功");
 
             ReturnWordListData returnWordListData = new ReturnWordListData();
-            returnWordListData.setTotalpage(wardPageInfo.getPages());
+            returnWordListData.setTotalpage((int) wardPageInfo.getTotal());
             returnWordListData.setPagenum(wardPageInfo.getPageNum());
             returnWordListData.setPatients(returnWordListDataLists);
             returnWordList.setData(returnWordListData);

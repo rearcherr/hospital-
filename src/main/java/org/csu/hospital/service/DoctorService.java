@@ -55,4 +55,7 @@ public class DoctorService {
     public void deleteDoctor(int docId) {
         doctorMapper.deleteDoctor(docId);
     }
+    public double getTotalWage(){
+        return  doctorMapper.getTotalWage();
+    }
 }

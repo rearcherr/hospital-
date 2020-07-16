@@ -6,6 +6,7 @@ import org.csu.hospital.domain.ReturnDoctorSalarys.ReturnDoctorSalarysDateList;
 import java.util.List;
 
 public class ReturnDoctorInfoData {
+    @JsonProperty("total")
     private int totalpage;
     private int pagenum;
     @JsonProperty("doctors")

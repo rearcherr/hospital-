@@ -9,4 +9,6 @@ import java.util.List;
 public interface FundMapper {
     int getTotalInSomeDays(int days);
     int getTotalAtSomeDaysBefore(int days);
+    double getTotalOutcomeInSomeDays(int days);
+    double getTotalOutcomeAtSomeDaysBefore(int days);
 }

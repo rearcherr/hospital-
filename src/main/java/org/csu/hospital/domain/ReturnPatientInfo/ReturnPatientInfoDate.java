@@ -1,9 +1,12 @@
 package org.csu.hospital.domain.ReturnPatientInfo;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReturnPatientInfoDate {
+    @JsonProperty("total")
     private int totalpage;
     private int pagenum;
     private List<ReturnPatientInfoDateList> returnPatientInfoDateLists = new ArrayList<ReturnPatientInfoDateList>();

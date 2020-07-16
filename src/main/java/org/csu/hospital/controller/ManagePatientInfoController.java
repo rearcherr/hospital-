@@ -51,11 +51,11 @@ public class ManagePatientInfoController {
                     returnPatientInfoDateList.setId(patient.getPatId());
                     returnPatientInfoDateList.setName(patient.getPatName());
                     returnPatientInfoDateList.setPatGender(patient.getPatGender());
-                    returnPatientInfoDateList.setPhone(patient.getPatName());
+                    returnPatientInfoDateList.setPhone(patient.getPatTel());
                     returnPatientInfoDateLists.add(returnPatientInfoDateList);
                 }
                 returnPatientInfoDate.setReturnPatientInfoDateLists(returnPatientInfoDateLists);
-                returnPatientInfoDate.setTotalpage(patientPageInfo.getPages());
+                returnPatientInfoDate.setTotalpage((int) patientPageInfo.getTotal());
                 returnPatientInfoDate.setPagenum(patientPageInfo.getPageNum());
                 returnPatientInfo.setMeta(meta);
                 returnPatientInfo.setReturnPatientInfoDate(returnPatientInfoDate);
@@ -77,11 +77,11 @@ public class ManagePatientInfoController {
                     returnPatientInfoDateList.setId(patient.getPatId());
                     returnPatientInfoDateList.setName(patient.getPatName());
                     returnPatientInfoDateList.setPatGender(patient.getPatGender());
-                    returnPatientInfoDateList.setPhone(patient.getPatName());
+                    returnPatientInfoDateList.setPhone(patient.getPatTel());
                     returnPatientInfoDateLists.add(returnPatientInfoDateList);
                 }
                 returnPatientInfoDate.setReturnPatientInfoDateLists(returnPatientInfoDateLists);
-                returnPatientInfoDate.setTotalpage(patientPageInfo.getPages());
+                returnPatientInfoDate.setTotalpage((int) patientPageInfo.getTotal());
                 returnPatientInfoDate.setPagenum(patientPageInfo.getPageNum());
                 returnPatientInfo.setMeta(meta);
                 returnPatientInfo.setReturnPatientInfoDate(returnPatientInfoDate);
@@ -115,7 +115,7 @@ public class ManagePatientInfoController {
             returnPatientInfoByIdData.setDate(patient.getPatDate());
             returnPatientInfoByIdData.setName(patient.getPatName());
             returnPatientInfoByIdData.setPatGender(patient.getPatGender());
-            returnPatientInfoByIdData.setPhone(patient.getPatName());
+            returnPatientInfoByIdData.setPhone(patient.getPatTel());
             returnPatientInfoById.setMeta(meta);
             returnPatientInfoById.setReturnPatientInfoByIdData(returnPatientInfoByIdData);
             return returnPatientInfoById;
