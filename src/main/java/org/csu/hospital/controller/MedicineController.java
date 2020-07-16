@@ -29,8 +29,8 @@ public class MedicineController {
     MedicineService medicineService;
 
     @GetMapping("/medicalExpenses")
-    public String getMedicalEnpense(int pagenum, int pagesize) {
-        List<PurchaseRecord> purchaseRecordList = medicineService.getPurchaseRecordByPage(pagenum, pagesize);
+    public String getMedicalExpense(int pagenum, int pagesize) {
+        List<PurchaseRecord> purchaseRecordList = medicineService.getPurchaseRecordByPage(pagenum-1, pagesize);
         JSONObject jsonObject = new JSONObject();
         int totalPage = medicineService.getPurchaseRecordNum(pagesize);
         jsonObject.put("total", totalPage);
@@ -41,7 +41,7 @@ public class MedicineController {
 
     @GetMapping("/medicine")
     public String getMedicineList(int pagenum, int pagesize) {
-        List<Medicine> medicineList = medicineService.getMedicineByPage(pagenum, pagesize);
+        List<Medicine> medicineList = medicineService.getMedicineByPage(pagenum-1, pagesize);
         JSONObject jsonObject = new JSONObject();
         int totalPage = medicineService.getMedicineNum(pagesize);
         jsonObject.put("totalpage", totalPage);
