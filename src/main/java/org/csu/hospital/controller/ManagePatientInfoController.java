@@ -222,11 +222,13 @@ public class ManagePatientInfoController {
                 ReturnPatientMedRecordByIdDataList returnPatientMedRecordByIdDataList = new ReturnPatientMedRecordByIdDataList();
                 returnPatientMedRecordByIdDataList.setId(medicalRecordItem.get(i).getItemId());
                 returnPatientMedRecordByIdDataList.setDescription(medicalRecordItem.get(i).getDescription());
-                returnPatientMedRecordByIdDataList.setPatientName(medicalRecord.getPatName());
+//                returnPatientMedRecordByIdDataList.setPatientName(medicalRecord.getPatName());
                 returnPatientMedRecordByIdDataList.setRecid(medicalRecordItem.get(i).getRecId());
                 returnPatientMedRecordByIdDataList.setTime(medicalRecordItem.get(i).getTime());
                 Doctor doctor = doctorService.getDoctorByDocId(medicalRecordItem.get(i).getDocId());
+                Patient patient = patientService.getPatientByPatId(medicalRecord.getPatId());
                 returnPatientMedRecordByIdDataList.setDocName(doctor.getDocName());
+                returnPatientMedRecordByIdDataList.setPatientName(patient.getPatName());
                 returnPatientMedRecordByIdDataLists.add(returnPatientMedRecordByIdDataList);
             }
             returnPatientMedRecordByIdData.setReturnPatientMedRecordByIdDataLists(returnPatientMedRecordByIdDataLists);
