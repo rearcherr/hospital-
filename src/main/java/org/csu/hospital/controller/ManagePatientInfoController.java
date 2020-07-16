@@ -115,7 +115,7 @@ public class ManagePatientInfoController {
             returnPatientInfoByIdData.setDate(patient.getPatDate());
             returnPatientInfoByIdData.setName(patient.getPatName());
             returnPatientInfoByIdData.setPatGender(patient.getPatGender());
-            returnPatientInfoByIdData.setPhone(patient.getPatName());
+            returnPatientInfoByIdData.setPhone(patient.getPatTel());
             returnPatientInfoById.setMeta(meta);
             returnPatientInfoById.setReturnPatientInfoByIdData(returnPatientInfoByIdData);
             return returnPatientInfoById;
