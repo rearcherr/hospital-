@@ -1,5 +1,7 @@
 package org.csu.hospital.domain;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -9,6 +11,7 @@ public class PurchaseRecord {
     String name;
     int amount;
     BigDecimal price;
+    @JSONField(format="yyyy-MM-dd")
     Date date;
 
     public String getName() {
