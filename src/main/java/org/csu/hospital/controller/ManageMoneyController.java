@@ -48,6 +48,7 @@ public class ManageMoneyController {
                     returnDoctorSalarysDateList.setOnduty(doctors.get(i).isOnDuty());
                     returnDoctorSalarysDateList.setWage(doctors.get(i).getWage());
                     returnDoctorSalarysDateList.setDepartment(doctors.get(i).getDocDepartment());
+                    returnDoctorSalarysDateList.setRank(doctors.get(i).getDocRank());
                     returnDoctorSalarysDateLists.add(returnDoctorSalarysDateList);
                 }
                 returnDoctorSalarysDate.setReturnDoctorSalarysDateLists(returnDoctorSalarysDateLists);
@@ -74,6 +75,7 @@ public class ManageMoneyController {
                     returnDoctorSalarysDateList.setOnduty(doctors.get(i).isOnDuty());
                     returnDoctorSalarysDateList.setWage(doctors.get(i).getWage());
                     returnDoctorSalarysDateList.setDepartment(doctors.get(i).getDocDepartment());
+                    returnDoctorSalarysDateList.setRank(doctors.get(i).getDocRank());
                     returnDoctorSalarysDateLists.add(returnDoctorSalarysDateList);
                 }
                 returnDoctorSalarysDate.setReturnDoctorSalarysDateLists(returnDoctorSalarysDateLists);
