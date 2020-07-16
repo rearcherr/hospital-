@@ -42,7 +42,7 @@ public class ManageFundController {
     @ResponseStatus(value = HttpStatus.OK)
     public String getExpense(){
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("totalExpense",fundService.getTotalInSomeDays(30)+doctorService.getTotalWage());
+        jsonObject.put("totalExpense",fundService.getTotalOutcomeInSomeDays(30)+doctorService.getTotalWage());
         JSONArray jsonArray = new JSONArray(5);
         jsonArray.add(0,fundService.getTotalOutcomeSomeDaysBefore(0));
         jsonArray.add(1,fundService.getTotalOutcomeSomeDaysBefore(1));
