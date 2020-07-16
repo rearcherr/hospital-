@@ -23,25 +23,25 @@ public class ManageMoneyController {
     @Autowired
     DoctorService doctorService;
 
-
-    //查看医生工资
+    // 查看医生工资
     @GetMapping("/salarys")
     @ResponseBody
-    public ReturnDoctorSalarys getPatientInfo(@RequestParam(value = "query", required = false)String query,@RequestParam("pagenum")int pageNum, @RequestParam("pagesize")int pageSize){
+    public ReturnDoctorSalarys getPatientInfo(@RequestParam(value = "query", required = false) String query,
+            @RequestParam("pagenum") int pageNum, @RequestParam("pagesize") int pageSize) {
 
         ReturnDoctorSalarys returnDoctorSalarys = new ReturnDoctorSalarys();
 
         try {
-            if(query==null) {
+            if (query == "") {
                 ReturnDoctorSalarysMeta returnDoctorSalarysMeta = new ReturnDoctorSalarysMeta();
                 ReturnDoctorSalarysDate returnDoctorSalarysDate = new ReturnDoctorSalarysDate();
 
                 returnDoctorSalarysMeta.setStatus(200);
                 returnDoctorSalarysMeta.setMsg("获取成功");
-                PageInfo<Doctor> doctorPageInfo = doctorService.findAllDoctorSalaryByPageS(pageNum,pageSize);
+                PageInfo<Doctor> doctorPageInfo = doctorService.findAllDoctorSalaryByPageS(pageNum, pageSize);
                 List<Doctor> doctors = doctorPageInfo.getList();
                 List<ReturnDoctorSalarysDateList> returnDoctorSalarysDateLists = new ArrayList<ReturnDoctorSalarysDateList>();
-                for(int i=0;i<doctors.size();i++){
+                for (int i = 0; i < doctors.size(); i++) {
                     ReturnDoctorSalarysDateList returnDoctorSalarysDateList = new ReturnDoctorSalarysDateList();
                     returnDoctorSalarysDateList.setId(doctors.get(i).getDocId());
                     returnDoctorSalarysDateList.setName(doctors.get(i).getDocName());
@@ -49,6 +49,34 @@ public class ManageMoneyController {
                     returnDoctorSalarysDateList.setWage(doctors.get(i).getWage());
                     returnDoctorSalarysDateList.setDepartment(doctors.get(i).getDocDepartment());
                     returnDoctorSalarysDateLists.add(returnDoctorSalarysDateList);
+                    System.out.println("name:" + returnDoctorSalarysDateList.getName());
+                }
+                returnDoctorSalarysDate.setReturnDoctorSalarysDateLists(returnDoctorSalarysDateLists);
+                returnDoctorSalarysDate.setTotalpage(doctorPageInfo.getPages());
+                returnDoctorSalarysDate.setPagenum(doctorPageInfo.getPageNum());
+                returnDoctorSalarys.setDate(returnDoctorSalarysDate);
+                returnDoctorSalarys.setMeta(returnDoctorSalarysMeta);
+
+                return returnDoctorSalarys;
+            } else {
+                ReturnDoctorSalarysMeta returnDoctorSalarysMeta = new ReturnDoctorSalarysMeta();
+                ReturnDoctorSalarysDate returnDoctorSalarysDate = new ReturnDoctorSalarysDate();
+
+                returnDoctorSalarysMeta.setStatus(200);
+                returnDoctorSalarysMeta.setMsg("获取成功");
+                PageInfo<Doctor> doctorPageInfo = doctorService.findAllDoctorSalaryByPageSAndDocName(query, pageNum,
+                        pageSize);
+                List<Doctor> doctors = doctorPageInfo.getList();
+                List<ReturnDoctorSalarysDateList> returnDoctorSalarysDateLists = new ArrayList<ReturnDoctorSalarysDateList>();
+                for (int i = 0; i < doctors.size(); i++) {
+                    ReturnDoctorSalarysDateList returnDoctorSalarysDateList = new ReturnDoctorSalarysDateList();
+                    returnDoctorSalarysDateList.setId(doctors.get(i).getDocId());
+                    returnDoctorSalarysDateList.setName(doctors.get(i).getDocName());
+                    returnDoctorSalarysDateList.setOnduty(doctors.get(i).isOnDuty());
+                    returnDoctorSalarysDateList.setWage(doctors.get(i).getWage());
+                    returnDoctorSalarysDateList.setDepartment(doctors.get(i).getDocDepartment());
+                    returnDoctorSalarysDateLists.add(returnDoctorSalarysDateList);
+                    System.out.println("name:" + returnDoctorSalarysDateList.getName());
                 }
                 returnDoctorSalarysDate.setReturnDoctorSalarysDateLists(returnDoctorSalarysDateLists);
                 returnDoctorSalarysDate.setTotalpage(doctorPageInfo.getPages());
@@ -58,34 +86,7 @@ public class ManageMoneyController {
 
                 return returnDoctorSalarys;
             }
-            else {
-                ReturnDoctorSalarysMeta returnDoctorSalarysMeta = new ReturnDoctorSalarysMeta();
-                ReturnDoctorSalarysDate returnDoctorSalarysDate = new ReturnDoctorSalarysDate();
-
-                returnDoctorSalarysMeta.setStatus(200);
-                returnDoctorSalarysMeta.setMsg("获取成功");
-                PageInfo<Doctor> doctorPageInfo = doctorService.findAllDoctorSalaryByPageSAndDocName(query,pageNum,pageSize);
-                List<Doctor> doctors = doctorPageInfo.getList();
-                List<ReturnDoctorSalarysDateList> returnDoctorSalarysDateLists = new ArrayList<ReturnDoctorSalarysDateList>();
-                for(int i=0;i<doctors.size();i++){
-                    ReturnDoctorSalarysDateList returnDoctorSalarysDateList = new ReturnDoctorSalarysDateList();
-                    returnDoctorSalarysDateList.setId(doctors.get(i).getDocId());
-                    returnDoctorSalarysDateList.setName(doctors.get(i).getDocName());
-                    returnDoctorSalarysDateList.setOnduty(doctors.get(i).isOnDuty());
-                    returnDoctorSalarysDateList.setWage(doctors.get(i).getWage());
-                    returnDoctorSalarysDateList.setDepartment(doctors.get(i).getDocDepartment());
-                    returnDoctorSalarysDateLists.add(returnDoctorSalarysDateList);
-                }
-                returnDoctorSalarysDate.setReturnDoctorSalarysDateLists(returnDoctorSalarysDateLists);
-                returnDoctorSalarysDate.setTotalpage(doctorPageInfo.getPages());
-                returnDoctorSalarysDate.setPagenum(doctorPageInfo.getPageNum());
-                returnDoctorSalarys.setDate(returnDoctorSalarysDate);
-                returnDoctorSalarys.setMeta(returnDoctorSalarysMeta);
-
-                return returnDoctorSalarys;
-            }
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             ReturnDoctorSalarysMeta returnDoctorSalarysMeta = new ReturnDoctorSalarysMeta();
             returnDoctorSalarysMeta.setStatus(400);
             returnDoctorSalarysMeta.setMsg("获取失败");
@@ -94,10 +95,10 @@ public class ManageMoneyController {
         }
     }
 
-    //修改医生工资信息
+    // 修改医生工资信息
     @PutMapping("/salarys/{id}")
     @ResponseBody
-    public ReturnUpdateDoctorSalarys Update(@PathVariable("id")long id,@RequestParam("wage")double wage){
+    public ReturnUpdateDoctorSalarys Update(@PathVariable("id") long id, @RequestParam("wage") double wage) {
         try {
             Doctor doctor = doctorService.getDoctorByDocId(id);
             doctor.setWage(wage);
@@ -117,8 +118,7 @@ public class ManageMoneyController {
             returnUpdateDoctorSalarys.setMeta(meta);
             returnUpdateDoctorSalarys.setReturnUpdateDoctorSalarysDate(returnUpdateDoctorSalarysDate);
             return returnUpdateDoctorSalarys;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             ReturnUpdateDoctorSalarys returnUpdateDoctorSalarys = new ReturnUpdateDoctorSalarys();
             Meta meta = new Meta();
             meta.setMsg("更新失败");

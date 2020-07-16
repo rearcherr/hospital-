@@ -46,7 +46,7 @@ public class PatientService {
     public MedicalRecord getMedicalRecordsByPatient(int id) {
         MedicalRecord medicalRecord;
         medicalRecord = patientMapper.getMedicalRecordByPatient(id);
-        medicalRecord.setPatName(patientMapper.getPatientByPatId(medicalRecord.getPatId()).getPatName());
+//        medicalRecord.setPatName(patientMapper.getPatientByPatId(medicalRecord.getPatId()).getPatName());
         medicalRecord.setMedicalRecordItems(getItemListByRecord(medicalRecord.getRecId()));
         return medicalRecord;
     }

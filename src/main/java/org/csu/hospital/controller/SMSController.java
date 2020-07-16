@@ -12,6 +12,7 @@ import com.aliyuncs.profile.DefaultProfile;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -20,18 +21,17 @@ public class SMSController {
 
     @GetMapping("/getCode")
     @ResponseBody
-    public String getSMS(String phoneNum)
-    {
-        String Code = Integer.toString((int)(Math.random()*10000));  //生成四位随机数
+    public String getSMS(@RequestParam("phone") String phoneNum) {
+        System.out.println(phoneNum);
+        String Code = Integer.toString((int) (Math.random() * 10000)); // 生成四位随机数
         JSONObject msg = new JSONObject();
         try {
-            msg.put("code",Code);
-        }
-        catch (Exception e)
-        {
+            msg.put("code", Code);
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAI4GJMUtUVcribRWuwEPCi", "2xf7FxXRbRi1o95NhUlFjaIdiKQ44m");
+        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAI4GJMUtUVcribRWuwEPCi",
+                "2xf7FxXRbRi1o95NhUlFjaIdiKQ44m");
         IAcsClient client = new DefaultAcsClient(profile);
 
         CommonRequest request = new CommonRequest();

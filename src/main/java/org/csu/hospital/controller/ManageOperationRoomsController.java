@@ -79,7 +79,8 @@ public class ManageOperationRoomsController {
             @RequestParam("pagenum") int pagenum, @RequestParam("pagesize") int pagesize) {
         ReturnOperationRoomsInfo returnOperationRoomsInfo = new ReturnOperationRoomsInfo();
         try {
-            if (query == null) {
+            if (query == "") {
+                System.out.println("null-desu");
                 ReturnOperationRoomsInfoMeta returnOperationRoomsInfoMeta = new ReturnOperationRoomsInfoMeta();
                 returnOperationRoomsInfoMeta.setStatus(200);
                 returnOperationRoomsInfoMeta.setMsg("获取成功");
@@ -95,6 +96,7 @@ public class ManageOperationRoomsController {
                 returnOperationRoomsInfo.setMeta(returnOperationRoomsInfoMeta);
                 return returnOperationRoomsInfo;
             } else {
+                System.out.println("querey:" + query);
                 ReturnOperationRoomsInfoMeta returnOperationRoomsInfoMeta = new ReturnOperationRoomsInfoMeta();
                 returnOperationRoomsInfoMeta.setStatus(200);
                 returnOperationRoomsInfoMeta.setMsg("获取成功");
