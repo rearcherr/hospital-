@@ -32,8 +32,8 @@ public class MedicineController {
     public String getMedicalEnpense(int pagenum, int pagesize) {
         List<PurchaseRecord> purchaseRecordList = medicineService.getPurchaseRecordByPage(pagenum, pagesize);
         JSONObject jsonObject = new JSONObject();
-        int totalPage = medicineService.getMedicineNum(pagesize);
-        jsonObject.put("totalpage", totalPage);
+        int totalPage = medicineService.getPurchaseRecordNum(pagesize);
+        jsonObject.put("total", totalPage);
         jsonObject.put("pagenum", pagenum);
         jsonObject.put("medicalExpenses", purchaseRecordList);
         return JSON.toJSONString(jsonObject);
