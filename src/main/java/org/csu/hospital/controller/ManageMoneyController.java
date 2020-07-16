@@ -81,7 +81,7 @@ public class ManageMoneyController {
                     System.out.println("name:" + returnDoctorSalarysDateList.getName());
                 }
                 returnDoctorSalarysDate.setReturnDoctorSalarysDateLists(returnDoctorSalarysDateLists);
-                returnDoctorSalarysDate.setTotalpage((int)doctorPageInfo.getTotal());
+                returnDoctorSalarysDate.setTotalpage((int) doctorPageInfo.getTotal());
                 returnDoctorSalarysDate.setPagenum(doctorPageInfo.getPageNum());
                 returnDoctorSalarys.setDate(returnDoctorSalarysDate);
                 returnDoctorSalarys.setMeta(returnDoctorSalarysMeta);
